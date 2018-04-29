@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".signalmeter.SignalMeterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/buttonSsid"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="6dp"
+            android:background="@drawable/bg_rounded_outline"
+            android:paddingBottom="4dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="4dp">
+
+            <TextView
+                android:id="@+id/textSsid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SSID"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"/>
+
+        </FrameLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.github.abdularis.gaugeview.LinearGaugeView
+                android:id="@+id/signalGauge"
+                android:layout_width="280dp"
+                android:layout_height="204dp"
+                app:currentNumber="75"
+                app:emptyBarColor="#6affffff"
+                app:filledBarColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:maxNumber="100"
+                app:minNumber="0"/>
+
+            <TextView
+                android:id="@+id/textPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="75%"
+                android:textColor="@android:color/white"
+                android:textSize="64sp"
+                app:layout_constraintStart_toStartOf="@+id/signalGauge"
+                app:layout_constraintTop_toTopOf="@id/signalGauge"/>
+
+            <TextView
+                android:id="@+id/textRssi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-55 dBm"
+                android:textColor="#c5ffffff"
+                android:textSize="28dp"
+                app:layout_constraintStart_toStartOf="@+id/signalGauge"
+                app:layout_constraintTop_toBottomOf="@id/textPercent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textSignalSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6dp"
+            android:text="Good"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"/>
+
+        <TextView
+            android:id="@+id/textConnection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textColor="@android:color/white"
+            android:text="Connected"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_rounded_card"
+            android:columnCount="2"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Name"/>
+
+            <TextView
+                android:id="@+id/textWifiName"
+                android:layout_gravity="right"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="wifi name"/>
+
+            <TextView
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Speed"/>
+
+            <TextView
+                android:id="@+id/textSpeed"
+                android:layout_gravity="right"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="-1 Mbps"/>
+
+            <TextView
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="IP"/>
+
+            <TextView
+                android:id="@+id/textIp"
+                android:layout_gravity="right"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="0.0.0.0"/>
+
+            <TextView
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="MAC"/>
+
+            <TextView
+                android:id="@+id/textMac"
+                android:layout_gravity="right"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="00:00:00:00:00"/>
+
+            <TextView
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Frequency"/>
+
+            <TextView
+                android:id="@+id/textFreq"
+                android:layout_gravity="right"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="0 MHz"/>
+        </GridLayout>
+
+    </LinearLayout>
+
+</ScrollView>
