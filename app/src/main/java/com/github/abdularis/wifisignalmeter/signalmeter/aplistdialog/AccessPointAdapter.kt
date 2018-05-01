@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.github.abdularis.wifisignalmeter.R
-import com.github.abdularis.wifisignalmeter.model.WifiAp
+import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
 
-class ApAdapter : RecyclerView.Adapter<ApAdapter.ViewHolder>() {
+class AccessPointAdapter : RecyclerView.Adapter<AccessPointAdapter.ViewHolder>() {
 
     var onTouchListener: OnTouchListener? = null
-    var wifiAp: List<WifiAp> = ArrayList()
+    var wifiAp: List<WifiAccessPoint> = ArrayList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -30,7 +30,7 @@ class ApAdapter : RecyclerView.Adapter<ApAdapter.ViewHolder>() {
         var textBssid: TextView = itemView.findViewById(R.id.textBssid)
         var itemContainer: View = itemView.findViewById(R.id.itemContainer)
 
-        fun bind(onTouchListener: OnTouchListener?, wifiAp: WifiAp) {
+        fun bind(onTouchListener: OnTouchListener?, wifiAp: WifiAccessPoint) {
             textSsid.text = wifiAp.ssid
             textBssid.text = wifiAp.bssid
             itemContainer.setOnTouchListener { v, event ->
@@ -41,6 +41,6 @@ class ApAdapter : RecyclerView.Adapter<ApAdapter.ViewHolder>() {
     }
 
     interface OnTouchListener {
-        fun onTouch(wifiAp: WifiAp)
+        fun onTouch(wifiAp: WifiAccessPoint)
     }
 }

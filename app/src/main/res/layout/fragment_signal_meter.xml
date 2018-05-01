@@ -46,7 +46,6 @@
                 android:id="@+id/signalGauge"
                 android:layout_width="280dp"
                 android:layout_height="204dp"
-                app:currentNumber="75"
                 app:emptyBarColor="#6affffff"
                 app:filledBarColor="#fff"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:text="Good"
             android:textColor="@android:color/white"
             android:textSize="28sp"/>
@@ -96,77 +95,133 @@
             android:textColor="@android:color/white"
             android:text="Connected"/>
 
-        <GridLayout
+        <LinearLayout
+            android:id="@+id/connInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:background="@drawable/bg_rounded_card"
-            android:columnCount="2"
+            android:orientation="vertical"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
-            <TextView
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Name"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15sp"
+                    android:text="Name"/>
 
-            <TextView
-                android:id="@+id/textWifiName"
-                android:layout_gravity="right"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="wifi name"/>
+                <TextView
+                    android:id="@+id/textWifiName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="15sp"
+                    android:text="wifi name"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Speed"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Link Speed"/>
 
-            <TextView
-                android:id="@+id/textSpeed"
-                android:layout_gravity="right"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="-1 Mbps"/>
+                <TextView
+                    android:id="@+id/textSpeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="-1 Mbps"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="IP"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="IP Address"/>
 
-            <TextView
-                android:id="@+id/textIp"
-                android:layout_gravity="right"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="0.0.0.0"/>
+                <TextView
+                    android:id="@+id/textIp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="0.0.0.0"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="MAC"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Router MAC"/>
 
-            <TextView
-                android:id="@+id/textMac"
-                android:layout_gravity="right"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="00:00:00:00:00"/>
+                <TextView
+                    android:id="@+id/textMac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="00:00:00:00:00"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Frequency"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Frequency"/>
 
-            <TextView
-                android:id="@+id/textFreq"
-                android:layout_gravity="right"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="0 MHz"/>
-        </GridLayout>
+                <TextView
+                    android:id="@+id/textFreq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="0 MHz"/>
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

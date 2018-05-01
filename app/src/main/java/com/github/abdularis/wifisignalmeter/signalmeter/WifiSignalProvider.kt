@@ -4,8 +4,7 @@ import android.content.Context
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import android.util.Log
-import com.github.abdularis.wifisignalmeter.common.Optional
-import com.github.abdularis.wifisignalmeter.model.WifiAp
+import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
 import io.reactivex.Flowable
 import java.util.concurrent.TimeUnit
 
@@ -13,7 +12,7 @@ class WifiSignalProvider(private val context: Context) {
 
     private val wifiManager: WifiManager = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
-//    fun wifiSignalUpdate(bssidFilter: String) : Flowable<Optional<WifiAp>> {
+//    fun wifiSignalUpdate(bssidFilter: String) : Flowable<Optional<WifiAccessPoint>> {
 //        return Flowable.interval(1000, TimeUnit.MILLISECONDS)
 //                .flatMap {
 //                    wifiManager.startScan()
@@ -26,7 +25,7 @@ class WifiSignalProvider(private val context: Context) {
 //                                    bssidFilter == it.BSSID
 //                                }
 //                                .map {
-//                                    val wifiAp = WifiAp.fromScanResult(it, if (isThisConnectedWifi(it)) wifiManager.connectionInfo else null)
+//                                    val wifiAp = WifiAccessPoint.fromScanResult(it, if (isThisConnectedWifi(it)) wifiManager.connectionInfo else null)
 //                                    Optional.of(wifiAp)
 //                                }
 //                                .defaultIfEmpty(Optional.empty())
@@ -34,14 +33,14 @@ class WifiSignalProvider(private val context: Context) {
 //                }
 //    }
 
-    fun wifiSignalUpdate(interval: Long): Flowable<List<WifiAp>> {
+    fun wifiSignalUpdate(interval: Long): Flowable<List<WifiAccessPoint>> {
             return Flowable.interval(0, interval, TimeUnit.MILLISECONDS)
                     .flatMap {
                         Log.v("Hahaha", "count: $it")
                         wifiManager.startScan()
                         Flowable.fromIterable(wifiManager.scanResults)
                                 .map {
-                                    WifiAp.fromScanResult(
+                                    WifiAccessPoint.fromScanResult(
                                             it,
                                             if (isThisConnectedWifi(it)) wifiManager.connectionInfo else null
                                     )

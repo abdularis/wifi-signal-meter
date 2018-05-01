@@ -3,20 +3,20 @@ package com.github.abdularis.wifisignalmeter.model
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiInfo
 
-class WifiAp(val bssid : String,
-             val ssid : String,
-             val capabilities : String,
-             val channelWidth : Int,
-             val frequency : Int,
-             val level : Int,
-             val wifiConnectionInfo : WifiInfo?) {
+class WifiAccessPoint(val bssid : String,
+                      val ssid : String,
+                      val capabilities : String,
+                      val channelWidth : Int,
+                      val frequency : Int,
+                      val level : Int,
+                      val wifiConnectionInfo : WifiInfo?) {
 
     val isConnected get() = wifiConnectionInfo != null
 
     companion object {
         @JvmStatic
-        fun empty(): WifiAp {
-            return WifiAp(
+        fun empty(): WifiAccessPoint {
+            return WifiAccessPoint(
                     bssid = "02:00:00:00:00:00",
                     ssid = "<no network>",
                     capabilities = "",
@@ -28,8 +28,8 @@ class WifiAp(val bssid : String,
         }
 
         @JvmStatic
-        fun fromScanResult(scanResult: ScanResult, wifiInfo : WifiInfo? = null) : WifiAp {
-            return WifiAp(
+        fun fromScanResult(scanResult: ScanResult, wifiInfo : WifiInfo? = null) : WifiAccessPoint {
+            return WifiAccessPoint(
                     bssid = scanResult.BSSID,
                     ssid = scanResult.SSID,
                     capabilities = scanResult.capabilities,
