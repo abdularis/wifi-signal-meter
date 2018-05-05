@@ -3,7 +3,9 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_signal_meter"
           android:title="Signal Meter"
+          android:icon="@drawable/ic_signal_meter"
           app:showAsAction="never"/>
     <item android:id="@+id/menu_wifi_list"
-          android:title="Wifi List"/>
+          android:title="Access Point List"
+        android:icon="@drawable/ic_wifi_ap_list"/>
 </menu>
