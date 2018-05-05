@@ -16,16 +16,16 @@
         <include
             layout="@layout/partial_toolbar"/>
 
-        <!--<FrameLayout-->
-            <!--android:id="@+id/content_layout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-        <!--</FrameLayout>-->
-        <fragment
+        <FrameLayout
+            android:id="@+id/content_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.github.abdularis.wifisignalmeter.signalmeter.SignalMeterFragment"
-            android:id="@+id/fragment"/>
+            android:layout_height="match_parent">
+        </FrameLayout>
+        <!--<fragment-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:name="com.github.abdularis.wifisignalmeter.wifilist.WifiListFragment"-->
+            <!--android:id="@+id/fragment"/>-->
 
     </LinearLayout>
 

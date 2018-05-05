@@ -1,23 +1,24 @@
 package com.github.abdularis.wifisignalmeter.signalmeter
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.net.wifi.WifiInfo
+import android.content.Intent
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.github.abdularis.wifisignalmeter.App
 
 import com.github.abdularis.wifisignalmeter.R
 import com.github.abdularis.wifisignalmeter.ViewModelFactor
+import com.github.abdularis.wifisignalmeter.common.calcSignalPercentage
 import com.github.abdularis.wifisignalmeter.common.intToStringIP
 import com.github.abdularis.wifisignalmeter.common.percentToSignalLevel
 import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
-import com.github.abdularis.wifisignalmeter.signalmeter.aplistdialog.WifiApListDialogFragment
+import com.github.abdularis.wifisignalmeter.wifiselector.WifiSelectorActivity
 import kotlinx.android.synthetic.main.fragment_signal_meter.*
 import javax.inject.Inject
 
@@ -39,14 +40,8 @@ class SignalMeterFragment : Fragment() {
         viewModel.wifiUpdates.observe(this, Observer<WifiAccessPoint> { v -> onWifiSignalUpdate(v) })
 
         buttonSsid.setOnClickListener {
-            val ft = activity?.supportFragmentManager?.beginTransaction()
-            val dialog = WifiApListDialogFragment()
-            dialog.onItemTouchListner = object: WifiApListDialogFragment.OnItemTouchListener {
-                override fun onTouch(wifiAp: WifiAccessPoint) {
-                    viewModel.bssidFilter = wifiAp.bssid
-                }
-            }
-            dialog.show(ft, "dialog")
+            val i = Intent(context, WifiSelectorActivity::class.java)
+            startActivityForResult(i, 110)
         }
     }
 
@@ -60,13 +55,20 @@ class SignalMeterFragment : Fragment() {
         viewModel.stopSignalUpdates()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == 110) {
+            val bssid = data?.data.toString()
+            viewModel.bssidFilter = bssid
+        }
+    }
+
     private fun onWifiSignalUpdate(wifiAp: WifiAccessPoint?) {
         if (wifiAp != null) {
-            val levelPercent = WifiManager.calculateSignalLevel(wifiAp.level, 101)
+            val levelPercent = calcSignalPercentage(wifiAp.level)
 
             signalGauge.currentNumber = levelPercent
-            textPercent.text = "$levelPercent%"
-            textRssi.text = "${wifiAp.level} dbm"
+            textPercent.text = "$levelPercent"
+            textRssi.text = "${wifiAp.level}"
             textSignalSummary.text = percentToSignalLevel(levelPercent)
             textSsid.text = wifiAp.ssid
             textConnection.text = if (wifiAp.isConnected) "Connected" else "Not connected"
@@ -85,8 +87,8 @@ class SignalMeterFragment : Fragment() {
             }
         } else {
             signalGauge.currentNumber = 0
-            textPercent.text = "0%"
-            textRssi.text = "0 dbm"
+            textPercent.text = "0"
+            textRssi.text = "0"
             textSignalSummary.text = "No Signal"
             textSsid.text = "<select wifi>"
             textConnection.text = "Cannot detect wifi signal"
