@@ -36,9 +36,9 @@ class SimpleWifiListAdapter: RecyclerView.Adapter<SimpleWifiListAdapter.ViewHold
         var itemContainer: View = itemView.findViewById(R.id.itemContainer)
 
         fun bind(onItemClickListener: OnItemClickListener?, wifiAp: WifiAccessPoint) {
-            textSsid.text = wifiAp.ssid
-            textBssid.text = wifiAp.bssid
-            signalGauge.currentNumber = calcSignalPercentage(wifiAp.level)
+            textSsid.text = wifiAp.signal.ssid
+            textBssid.text = wifiAp.signal.bssid
+            signalGauge.currentNumber = calcSignalPercentage(wifiAp.signal.level)
             itemContainer.setOnClickListener {
                 onItemClickListener?.onItemClick(wifiAp)
             }

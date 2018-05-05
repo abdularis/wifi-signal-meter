@@ -39,7 +39,7 @@ class WifiSelectorActivity : AppCompatActivity() {
         wifiListAdapter.onItemClickListener = object: SimpleWifiListAdapter.OnItemClickListener {
             override fun onItemClick(wifiAp: WifiAccessPoint) {
                 val data = Intent()
-                data.data = Uri.parse(wifiAp.bssid)
+                data.data = Uri.parse(wifiAp.signal.bssid)
                 setResult(Activity.RESULT_OK, data)
                 finish()
             }

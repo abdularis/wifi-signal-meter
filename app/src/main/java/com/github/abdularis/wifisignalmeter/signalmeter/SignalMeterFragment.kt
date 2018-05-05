@@ -4,7 +4,6 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -64,34 +63,49 @@ class SignalMeterFragment : Fragment() {
 
     private fun onWifiSignalUpdate(wifiAp: WifiAccessPoint?) {
         if (wifiAp != null) {
-            val levelPercent = calcSignalPercentage(wifiAp.level)
+            textBssid.visibility = View.VISIBLE
+            textManufacture.visibility = View.VISIBLE
+
+            val levelPercent = calcSignalPercentage(wifiAp.signal.level)
 
             signalGauge.currentNumber = levelPercent
             textPercent.text = "$levelPercent"
-            textRssi.text = "${wifiAp.level}"
+            textRssi.text = "${wifiAp.signal.level}"
             textSignalSummary.text = percentToSignalLevel(levelPercent)
-            textSsid.text = wifiAp.ssid
+            textSsid.text = wifiAp.signal.ssid
+            textBssid.text = wifiAp.signal.bssid
+            textManufacture.text = wifiAp.signal.vendor
+            textFreq.text = "${wifiAp.signal.channel.frequency} MHz,  Ch: ${wifiAp.signal.channel.channelNumber}"
             textConnection.text = if (wifiAp.isConnected) "Connected" else "Not connected"
 
             if (wifiAp.isConnected) {
-                val connInfo = wifiAp.wifiConnectionInfo
+                val connInfo = wifiAp.connectionInfo
 
                 connInfoLayout.visibility = View.VISIBLE
-                textWifiName.text = wifiAp.ssid
+                imageConnected.visibility = View.VISIBLE
+                textWifiName.text = wifiAp.signal.ssid
                 textSpeed.text = "${connInfo?.linkSpeed} Mbps"
-                textIp.text = intToStringIP(connInfo?.ipAddress)
-                textMac.text = connInfo?.bssid
-                textFreq.text = "${wifiAp.frequency} MHz"
+                textIp.text = connInfo?.ipAddress
+                textDns1.text = connInfo?.dns1
+                textDns2.text = connInfo?.dns2
+                textGateway.text = connInfo?.gateway
+                textNetmask.text = connInfo?.netmask
+                textServerAddress.text = connInfo?.serverAddress
             } else {
                 connInfoLayout.visibility = View.GONE
+                imageConnected.visibility = View.GONE
             }
         } else {
+            textBssid.visibility = View.GONE
+            textManufacture.visibility = View.GONE
+
             signalGauge.currentNumber = 0
             textPercent.text = "0"
             textRssi.text = "0"
             textSignalSummary.text = "No Signal"
             textSsid.text = "<select wifi>"
             textConnection.text = "Cannot detect wifi signal"
+            textFreq.text = "0 MHz"
             connInfoLayout.visibility = View.GONE
         }
     }

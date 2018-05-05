@@ -37,12 +37,12 @@ class WifiListAdapter: RecyclerView.Adapter<WifiListAdapter.ViewHolder>() {
         var itemContainer: View = itemView.findViewById(R.id.itemContainer)
 
         fun bind(onItemClickListener: OnItemClickListener?, wifiAp: WifiAccessPoint) {
-            val levelPercent = calcSignalPercentage(wifiAp.level)
-            textSsid.text = wifiAp.ssid
-            textBssid.text = wifiAp.bssid
+            val levelPercent = calcSignalPercentage(wifiAp.signal.level)
+            textSsid.text = wifiAp.signal.ssid
+            textBssid.text = wifiAp.signal.bssid
             signalGauge.currentNumber = levelPercent
             textPercent.text = "$levelPercent%"
-            textFreq.text = "${wifiAp.frequency} MHz"
+            textFreq.text = "${wifiAp.signal.channel.frequency} MHz"
             itemContainer.setOnClickListener { v ->
                 onItemClickListener?.onItemClick(wifiAp)
             }

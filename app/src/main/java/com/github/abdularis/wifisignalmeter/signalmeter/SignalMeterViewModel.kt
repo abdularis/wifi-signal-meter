@@ -13,7 +13,6 @@ import javax.inject.Inject
 class SignalMeterViewModel @Inject constructor(private val wifiSignalProvider: WifiSignalProvider) : ViewModel() {
 
     private var disposable: Disposable? = null
-    val wifiList: MutableLiveData<List<WifiAccessPoint>> = MutableLiveData()
     val wifiUpdates: MutableLiveData<WifiAccessPoint> = MutableLiveData()
     var bssidFilter: String = ""
         set(value) {
@@ -25,19 +24,14 @@ class SignalMeterViewModel @Inject constructor(private val wifiSignalProvider: W
         }
 
     fun startWifiUpdates() {
+        val flowable: Flowable<Optional<WifiAccessPoint>> = if (bssidFilter.isEmpty()) {
+            wifiSignalProvider.connectedWifiSignalUpdate(2000)
+        } else {
+            wifiSignalProvider.wifiSignalUpdate(2000, bssidFilter)
+        }
+
         disposable?.dispose()
-        disposable = wifiSignalProvider.wifiSignalUpdate(2000)
-                .flatMap {
-                    wifiList.postValue(it)
-                    Flowable.fromIterable(it)
-                            .filter {
-                                if (bssidFilter.isEmpty())
-                                    it.isConnected else
-                                    it.bssid == bssidFilter
-                            }
-                            .map { Optional.of(it) }
-                            .defaultIfEmpty(Optional.empty())
-                }
+        disposable = flowable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

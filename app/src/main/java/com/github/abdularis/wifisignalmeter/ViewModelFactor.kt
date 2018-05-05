@@ -17,6 +17,6 @@ class ViewModelFactor @Inject constructor(
             return signalMeterViewModel as T
         else if (modelClass.isAssignableFrom(WifiListViewModel::class.java))
             return wifiListViewModel as T
-        throw IllegalArgumentException("Unknown view model type")
+        throw IllegalArgumentException("Unknown view model band")
     }
 }

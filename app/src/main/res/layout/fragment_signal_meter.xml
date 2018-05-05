@@ -38,6 +38,31 @@
 
         </FrameLayout>
 
+        <TextView
+            android:id="@+id/textBssid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="bssid"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/textManufacture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:text="manufacture"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAlignment="center"
+            android:textColor="#b0ffffff"
+            android:textSize="12sp"/>
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -91,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="dbm"
+                android:text="dBm"
                 android:textColor="#c5ffffff"
                 android:textSize="26dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textRssi"
@@ -109,13 +134,49 @@
             android:textColor="@android:color/white"
             android:textSize="28sp"/>
 
-        <TextView
-            android:id="@+id/textConnection"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_frequency"/>
+
+            <TextView
+                android:id="@+id/textFreq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:text="0 MHz"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:textColor="@android:color/white"
-            android:text="Connected"/>
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textConnection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Connected"/>
+            <ImageView
+                android:id="@+id/imageConnected"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_connected"/>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/connInfoLayout"
@@ -129,6 +190,22 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Connection Info"
+                android:textSize="18sp"
+                android:textColor="#4b4b4b"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="8dp"
+                android:background="#a8a9a9"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,7 +216,7 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="20dp"
                     android:textSize="15sp"
                     android:text="Name"/>
 
@@ -209,16 +286,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="Router MAC"/>
+                    android:text="Gateway"/>
 
                 <TextView
-                    android:id="@+id/textMac"
+                    android:id="@+id/textGateway"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:text="00:00:00:00:00"/>
+                    android:text="0.0.0.0"/>
             </LinearLayout>
 
             <LinearLayout
@@ -231,16 +308,82 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="Frequency"/>
+                    android:text="Netmask"/>
 
                 <TextView
-                    android:id="@+id/textFreq"
+                    android:id="@+id/textNetmask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:text="0 MHz"/>
+                    android:text="0.0.0.0"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="DNS 1"/>
+
+                <TextView
+                    android:id="@+id/textDns1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="0.0.0.0"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="DNS 2"/>
+
+                <TextView
+                    android:id="@+id/textDns2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="0.0.0.0"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="DHCP Server"/>
+
+                <TextView
+                    android:id="@+id/textServerAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:text="0.0.0.0"/>
             </LinearLayout>
 
         </LinearLayout>
