@@ -14,7 +14,6 @@ import com.github.abdularis.wifisignalmeter.App
 import com.github.abdularis.wifisignalmeter.R
 import com.github.abdularis.wifisignalmeter.ViewModelFactor
 import com.github.abdularis.wifisignalmeter.common.calcSignalPercentage
-import com.github.abdularis.wifisignalmeter.common.intToStringIP
 import com.github.abdularis.wifisignalmeter.common.percentToSignalLevel
 import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
 import com.github.abdularis.wifisignalmeter.wifiselector.WifiSelectorActivity
@@ -56,29 +55,28 @@ class SignalMeterFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == 110) {
-            val bssid = data?.data.toString()
-            viewModel.bssidFilter = bssid
+            val ssid = data?.extras?.get(WifiSelectorActivity.EXTRA_SSID).toString()
+            val bssid = data?.extras?.get(WifiSelectorActivity.EXTRA_BSSID).toString()
+            viewModel.filter(ssid, bssid)
         }
     }
 
     private fun onWifiSignalUpdate(wifiAp: WifiAccessPoint?) {
         if (wifiAp != null) {
-            textBssid.visibility = View.VISIBLE
-            textManufacture.visibility = View.VISIBLE
-
             val levelPercent = calcSignalPercentage(wifiAp.signal.level)
 
             signalGauge.currentNumber = levelPercent
             textPercent.text = "$levelPercent"
             textRssi.text = "${wifiAp.signal.level}"
             textSignalSummary.text = percentToSignalLevel(levelPercent)
-            textSsid.text = wifiAp.signal.ssid
+            textSsid.text = if (wifiAp.signal.isHidden) "<hidden wifi>" else wifiAp.signal.ssid
             textBssid.text = wifiAp.signal.bssid
             textManufacture.text = wifiAp.signal.vendor
             textFreq.text = "${wifiAp.signal.channel.frequency} MHz,  Ch: ${wifiAp.signal.channel.channelNumber}"
             textCapabilities.text = wifiAp.signal.capabilities
             textConnection.text = if (wifiAp.isConnected) "Connected" else "Not connected"
             imageLock.visibility = if (wifiAp.signal.authenticationNeeded) View.VISIBLE else View.GONE
+            imageHidden.visibility = if (wifiAp.signal.isHidden) View.VISIBLE else View.GONE
 
             if (wifiAp.isConnected) {
                 val connInfo = wifiAp.connectionInfo
@@ -98,17 +96,19 @@ class SignalMeterFragment : Fragment() {
                 imageConnected.visibility = View.GONE
             }
         } else {
-            textBssid.visibility = View.GONE
-            textManufacture.visibility = View.GONE
-
             signalGauge.currentNumber = 0
             textPercent.text = "0"
             textRssi.text = "0"
             textSignalSummary.text = "No Signal"
             textSsid.text = "<select wifi>"
+            textBssid.text = "02:00:00:00:00:00"
+            textManufacture.text = "-"
             textConnection.text = "Cannot detect wifi signal"
-            textFreq.text = "0 MHz"
+            textFreq.text = "- MHz,  Ch: -"
+            textCapabilities.text = "[]"
             connInfoLayout.visibility = View.GONE
+            imageLock.visibility = View.GONE
+            imageHidden.visibility = View.GONE
         }
     }
 

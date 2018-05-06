@@ -13,30 +13,49 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/buttonSsid"
-            android:layout_width="200dp"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="6dp"
-            android:background="@drawable/bg_rounded_outline"
-            android:paddingBottom="4dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="4dp">
+            android:layout_margin="6dp">
 
-            <TextView
-                android:id="@+id/textSsid"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageHidden"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:text="SSID"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"/>
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_mask"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonSsid"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/buttonSsid"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_rounded_outline"
+                android:paddingBottom="4dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textSsid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="SSID"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"/>
+
+            </FrameLayout>
+        </android.support.constraint.ConstraintLayout>
 
         <TextView
             android:id="@+id/textBssid"

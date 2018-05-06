@@ -19,8 +19,8 @@ class WifiSignalProvider(context: Context, private val vendorFinder: VendorFinde
         return wifiSignalUpdateOptionalFilter(interval, Predicate { isThisConnectedWifi(it) })
     }
 
-    fun wifiSignalUpdate(interval: Long, bssid: String) : Flowable<Optional<WifiAccessPoint>> {
-        return wifiSignalUpdateOptionalFilter(interval, Predicate { bssid == it.BSSID })
+    fun wifiSignalUpdate(interval: Long, ssid: String, bssid: String) : Flowable<Optional<WifiAccessPoint>> {
+        return wifiSignalUpdateOptionalFilter(interval, Predicate { ssid == it.SSID && bssid == it.BSSID })
     }
 
     fun wifiSignalUpdate(interval: Long): Flowable<List<WifiAccessPoint>> {
@@ -47,13 +47,15 @@ class WifiSignalProvider(context: Context, private val vendorFinder: VendorFinde
                                 .map {
                                     Optional.of(createWifiAp(it))
                                 }
+                                .take(1)
                                 .defaultIfEmpty(Optional.empty())
                     }
                 }
     }
 
     private fun isThisConnectedWifi(scanResult: ScanResult) =
-            wifiManager.connectionInfo.bssid == scanResult.BSSID
+        wifiManager.connectionInfo.ssid.trim('"') == scanResult.SSID &&
+                wifiManager.connectionInfo.bssid == scanResult.BSSID
 
     private fun createWifiAp(scanResult: ScanResult): WifiAccessPoint {
         return WifiAccessPointBuilder()

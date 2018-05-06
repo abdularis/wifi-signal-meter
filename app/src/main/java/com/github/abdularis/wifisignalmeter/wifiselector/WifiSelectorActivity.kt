@@ -20,6 +20,11 @@ import javax.inject.Inject
 
 class WifiSelectorActivity : AppCompatActivity() {
 
+    companion object {
+        const val EXTRA_SSID = "SSID"
+        const val EXTRA_BSSID = "BSSID"
+    }
+
     @Inject
     lateinit var viewModelFactor: ViewModelFactor
     lateinit var viewModel: WifiListViewModel
@@ -38,9 +43,10 @@ class WifiSelectorActivity : AppCompatActivity() {
 
         wifiListAdapter.onItemClickListener = object: SimpleWifiListAdapter.OnItemClickListener {
             override fun onItemClick(wifiAp: WifiAccessPoint) {
-                val data = Intent()
-                data.data = Uri.parse(wifiAp.signal.bssid)
-                setResult(Activity.RESULT_OK, data)
+                val intent = Intent()
+                intent.putExtra(EXTRA_SSID, wifiAp.signal.ssid)
+                intent.putExtra(EXTRA_BSSID, wifiAp.signal.bssid)
+                setResult(Activity.RESULT_OK, intent)
                 finish()
             }
         }
