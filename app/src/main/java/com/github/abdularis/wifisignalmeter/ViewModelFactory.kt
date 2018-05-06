@@ -6,7 +6,7 @@ import com.github.abdularis.wifisignalmeter.signalmeter.SignalMeterViewModel
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListViewModel
 import javax.inject.Inject
 
-class ViewModelFactor @Inject constructor(
+class ViewModelFactory @Inject constructor(
         private val signalMeterViewModel: SignalMeterViewModel,
         private val wifiListViewModel: WifiListViewModel
 ) : ViewModelProvider.Factory {

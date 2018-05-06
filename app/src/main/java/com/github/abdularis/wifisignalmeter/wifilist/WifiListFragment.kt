@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import com.github.abdularis.wifisignalmeter.App
 
 import com.github.abdularis.wifisignalmeter.R
-import com.github.abdularis.wifisignalmeter.ViewModelFactor
+import com.github.abdularis.wifisignalmeter.ViewModelFactory
 import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_wifi_list.*
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class WifiListFragment : Fragment() {
 
     @Inject
-    lateinit var viewModelFactor: ViewModelFactor
+    lateinit var mViewModelFactory: ViewModelFactory
     lateinit var viewModel: WifiListViewModel
     var onWifiItemClickListener: OnWifiItemClickListener? = null
     val wifiListAdapter: WifiListAdapter = WifiListAdapter()
@@ -29,7 +29,7 @@ class WifiListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity?.application as App).appComponent.inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactor).get(WifiListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, mViewModelFactory).get(WifiListViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

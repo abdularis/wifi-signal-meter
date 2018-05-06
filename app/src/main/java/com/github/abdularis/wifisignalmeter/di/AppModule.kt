@@ -2,7 +2,7 @@ package com.github.abdularis.wifisignalmeter.di
 
 import android.app.Application
 import android.content.Context
-import com.github.abdularis.wifisignalmeter.ViewModelFactor
+import com.github.abdularis.wifisignalmeter.ViewModelFactory
 import com.github.abdularis.wifisignalmeter.data.DbHelper
 import com.github.abdularis.wifisignalmeter.data.VendorFinder
 import com.github.abdularis.wifisignalmeter.signalmeter.SignalMeterViewModel
@@ -20,8 +20,8 @@ class AppModule(private val application : Application) {
 
     @Provides
     @Singleton
-    fun provideViewModelFactor(signalMeterViewModel: SignalMeterViewModel, wifiListViewModel: WifiListViewModel) : ViewModelFactor {
-        return ViewModelFactor(signalMeterViewModel, wifiListViewModel)
+    fun provideViewModelFactor(signalMeterViewModel: SignalMeterViewModel, wifiListViewModel: WifiListViewModel) : ViewModelFactory {
+        return ViewModelFactory(signalMeterViewModel, wifiListViewModel)
     }
 
     @Provides

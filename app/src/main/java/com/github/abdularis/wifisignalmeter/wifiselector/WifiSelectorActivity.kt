@@ -4,14 +4,13 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.github.abdularis.wifisignalmeter.App
 import com.github.abdularis.wifisignalmeter.R
-import com.github.abdularis.wifisignalmeter.ViewModelFactor
+import com.github.abdularis.wifisignalmeter.ViewModelFactory
 import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListViewModel
 import kotlinx.android.synthetic.main.activity_wifi_selector.*
@@ -26,7 +25,7 @@ class WifiSelectorActivity : AppCompatActivity() {
     }
 
     @Inject
-    lateinit var viewModelFactor: ViewModelFactor
+    lateinit var mViewModelFactory: ViewModelFactory
     lateinit var viewModel: WifiListViewModel
     private val wifiListAdapter: SimpleWifiListAdapter = SimpleWifiListAdapter()
 
@@ -35,7 +34,7 @@ class WifiSelectorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_wifi_selector)
 
         (application as App).appComponent.inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactor).get(WifiListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, mViewModelFactory).get(WifiListViewModel::class.java)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

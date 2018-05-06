@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import com.github.abdularis.wifisignalmeter.App
 
 import com.github.abdularis.wifisignalmeter.R
-import com.github.abdularis.wifisignalmeter.ViewModelFactor
+import com.github.abdularis.wifisignalmeter.ViewModelFactory
 import com.github.abdularis.wifisignalmeter.common.calcSignalPercentage
 import com.github.abdularis.wifisignalmeter.common.percentToSignalLevel
 import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 class SignalMeterFragment : Fragment() {
 
-    @Inject lateinit var viewModelFactor: ViewModelFactor
+    @Inject lateinit var mViewModelFactory: ViewModelFactory
     lateinit var viewModel: SignalMeterViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +34,7 @@ class SignalMeterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity?.application as App).appComponent.inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactor).get(SignalMeterViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, mViewModelFactory).get(SignalMeterViewModel::class.java)
         viewModel.wifiUpdates.observe(this, Observer<WifiAccessPoint> { v -> onWifiSignalUpdate(v) })
 
         buttonSsid.setOnClickListener {
