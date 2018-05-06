@@ -79,7 +79,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:textAlignment="center"
-            android:textColor="#b0ffffff"
+            android:textColor="@color/text_secondary"
             android:textSize="12sp"/>
 
         <android.support.constraint.ConstraintLayout
@@ -90,8 +90,8 @@
                 android:id="@+id/signalGauge"
                 android:layout_width="280dp"
                 android:layout_height="204dp"
-                app:emptyBarColor="#6affffff"
-                app:filledBarColor="#fff"
+                app:emptyBarColor="@color/signal_empty"
+                app:filledBarColor="@color/signal_filled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-55"
-                android:textColor="#c5ffffff"
+                android:textColor="@color/text_secondary"
                 android:textSize="34dp"
                 app:layout_constraintStart_toStartOf="@+id/signalGauge"
                 app:layout_constraintTop_toBottomOf="@id/textPercent"/>
@@ -136,7 +136,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:text="dBm"
-                android:textColor="#c5ffffff"
+                android:textColor="@color/text_secondary"
                 android:textSize="26dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textRssi"
                 app:layout_constraintStart_toEndOf="@+id/textRssi"/>

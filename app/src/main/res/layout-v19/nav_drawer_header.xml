@@ -32,7 +32,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
         android:textSize="14sp"
-        android:textColor="#ccffffff"
+        android:textColor="@color/text_secondary"
         android:text="Find &amp; analyze wifi signal"/>
 
 </LinearLayout>
