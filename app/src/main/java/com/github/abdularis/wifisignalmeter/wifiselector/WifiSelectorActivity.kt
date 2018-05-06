@@ -42,6 +42,8 @@ class WifiSelectorActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.title_select_wifi)
 
+        toolbar.setNavigationOnClickListener { finish() }
+
         wifiListAdapter.onItemClickListener = object: WifiListAdapter.OnItemClickListener {
             override fun onItemClick(wifiAp: WifiAccessPoint) {
                 val intent = Intent()

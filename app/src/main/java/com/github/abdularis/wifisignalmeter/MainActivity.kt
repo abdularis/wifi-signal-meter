@@ -3,6 +3,7 @@ package com.github.abdularis.wifisignalmeter
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import com.github.abdularis.wifisignalmeter.signalmeter.SignalMeterFragment
@@ -52,6 +53,14 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putString(STATE_CURRENT_FRAGMENT, currentFragmentTag)
+    }
+
+    override fun onBackPressed() {
+        when {
+            drawerLayout.isDrawerOpen(GravityCompat.START) -> drawerLayout.closeDrawers()
+            currentFragmentTag == TAG_WIFI_LIST -> selectNavItem(navigationView.menu.findItem(R.id.menu_signal_meter))
+            else -> super.onBackPressed()
+        }
     }
 
     private fun selectNavItem(item: MenuItem): Boolean {
