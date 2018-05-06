@@ -1,9 +1,11 @@
 package com.github.abdularis.wifisignalmeter.wifilist
 
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.github.abdularis.gaugeview.LinearGaugeView
 import com.github.abdularis.wifisignalmeter.R
@@ -32,16 +34,31 @@ class WifiListAdapter: RecyclerView.Adapter<WifiListAdapter.ViewHolder>() {
         var textBssid: TextView = itemView.findViewById(R.id.textBssid)
         var signalGauge: LinearGaugeView = itemView.findViewById(R.id.signalGauge)
         var textRssi: TextView = itemView.findViewById(R.id.textRssi)
+        var textVendor: TextView = itemView.findViewById(R.id.textVendor)
         var textFreq: TextView = itemView.findViewById(R.id.textFreq)
+        var textChannel: TextView = itemView.findViewById(R.id.textChannel)
+        var imageLock: ImageView = itemView.findViewById(R.id.imageLock)
         var itemContainer: View = itemView.findViewById(R.id.itemContainer)
 
         fun bind(onItemClickListener: OnItemClickListener?, wifiAp: WifiAccessPoint) {
             val levelPercent = calcSignalPercentage(wifiAp.signal.level)
-            textSsid.text = wifiAp.signal.ssid
+            if (wifiAp.signal.isHidden) {
+                textSsid.setTextColor(ContextCompat.getColor(textSsid.context, R.color.hidden_wifi))
+                textSsid.text = "<hidden wifi>"
+            } else {
+                textSsid.setTextColor(ContextCompat.getColor(textSsid.context, R.color.item_text_primary))
+                textSsid.text = wifiAp.signal.ssid
+            }
+            if (wifiAp.isConnected) {
+                textSsid.setTextColor(ContextCompat.getColor(textSsid.context, R.color.connected_wifi))
+            }
+            imageLock.visibility = if (wifiAp.signal.authenticationNeeded) View.VISIBLE else View.GONE
             textBssid.text = wifiAp.signal.bssid
             signalGauge.currentNumber = levelPercent
             textRssi.text = wifiAp.signal.level.toString()
+            textVendor.text = wifiAp.signal.vendor
             textFreq.text = wifiAp.signal.channel.frequency.toString()
+            textChannel.text = wifiAp.signal.channel.channelNumber.toString()
             itemContainer.setOnClickListener { v ->
                 onItemClickListener?.onItemClick(wifiAp)
             }

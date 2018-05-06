@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.MenuItem
 import com.github.abdularis.wifisignalmeter.App
 import com.github.abdularis.wifisignalmeter.R
 import com.github.abdularis.wifisignalmeter.ViewModelFactory
 import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
+import com.github.abdularis.wifisignalmeter.wifilist.WifiListAdapter
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListViewModel
 import kotlinx.android.synthetic.main.activity_wifi_selector.*
 import kotlinx.android.synthetic.main.partial_toolbar.*
@@ -27,7 +29,7 @@ class WifiSelectorActivity : AppCompatActivity() {
     @Inject
     lateinit var mViewModelFactory: ViewModelFactory
     lateinit var viewModel: WifiListViewModel
-    private val wifiListAdapter: SimpleWifiListAdapter = SimpleWifiListAdapter()
+    private val wifiListAdapter = WifiListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,7 @@ class WifiSelectorActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.title_select_wifi)
 
-        wifiListAdapter.onItemClickListener = object: SimpleWifiListAdapter.OnItemClickListener {
+        wifiListAdapter.onItemClickListener = object: WifiListAdapter.OnItemClickListener {
             override fun onItemClick(wifiAp: WifiAccessPoint) {
                 val intent = Intent()
                 intent.putExtra(EXTRA_SSID, wifiAp.signal.ssid)

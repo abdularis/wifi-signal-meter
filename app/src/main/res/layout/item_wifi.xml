@@ -40,6 +40,23 @@
         app:layout_constraintStart_toEndOf="@+id/signalGauge"
         app:layout_constraintTop_toBottomOf="@+id/textSsid"/>
 
+    <TextView
+        android:id="@+id/textVendor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:text="manufacture"
+        android:textColor="@color/item_text_ternary"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/signalGauge"
+        app:layout_constraintTop_toBottomOf="@+id/textBssid"/>
+
     <com.github.abdularis.gaugeview.LinearGaugeView
         android:id="@+id/signalGauge"
         android:layout_width="70dp"
@@ -52,16 +69,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <ImageView
+        android:id="@+id/imageLock"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginBottom="6dp"
+        android:src="@drawable/ic_lock"
+        android:tint="@color/item_text_secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/signalGauge"
+        app:layout_constraintStart_toStartOf="@+id/signalGauge"/>
+
     <TextView
         android:id="@+id/textRssi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="4dp"
         android:layout_marginStart="8dp"
         android:text="0"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/signalGauge"
@@ -96,17 +124,46 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/signalGauge"
-        app:layout_constraintTop_toBottomOf="@+id/textBssid"
-        app:layout_constraintVertical_bias="0.0"/>
+        app:layout_constraintTop_toBottomOf="@id/textVendor"/>
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
         android:text="@string/freq_unit"
         android:textColor="@color/item_text_secondary"
         app:layout_constraintStart_toEndOf="@+id/textFreq"
         app:layout_constraintTop_toTopOf="@+id/textFreq"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/channel"
+        android:textColor="@color/item_text_secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"/>
+
+    <TextView
+        android:id="@+id/textChannel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="6dp"
+        android:text="0"
+        android:textColor="@color/item_text_secondary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView2"/>
 
 </android.support.constraint.ConstraintLayout>

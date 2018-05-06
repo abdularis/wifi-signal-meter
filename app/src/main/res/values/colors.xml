@@ -14,4 +14,7 @@
     <color name="signal_empty">#6affffff</color>
     <color name="signal_filled">#fff</color>
     <color name="item_bg_pressed">#f1f7fa</color>
+
+    <color name="hidden_wifi">#EF6C00</color>
+    <color name="connected_wifi">#00C652</color>
 </resources>
