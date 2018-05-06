@@ -4,6 +4,7 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.net.wifi.WifiInfo
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -68,13 +69,14 @@ class SignalMeterFragment : Fragment() {
             signalGauge.currentNumber = levelPercent
             textPercent.text = "$levelPercent"
             textRssi.text = "${wifiAp.signal.level}"
-            textSignalSummary.text = percentToSignalLevel(levelPercent)
-            textSsid.text = if (wifiAp.signal.isHidden) "<hidden wifi>" else wifiAp.signal.ssid
+            textSignalSummary.text = percentToSignalLevel(context?.resources, levelPercent)
+            textSsid.text = if (wifiAp.signal.isHidden) getString(R.string.hidden_wifi) else wifiAp.signal.ssid
             textBssid.text = wifiAp.signal.bssid
             textManufacture.text = wifiAp.signal.vendor
-            textFreq.text = "${wifiAp.signal.channel.frequency} MHz,  Ch: ${wifiAp.signal.channel.channelNumber}"
+            textFreq.text = wifiAp.signal.channel.frequency.toString()
+            textChannel.text = wifiAp.signal.channel.channelNumber.toString()
             textCapabilities.text = wifiAp.signal.capabilities
-            textConnection.text = if (wifiAp.isConnected) "Connected" else "Not connected"
+            textConnection.setText(if (wifiAp.isConnected) R.string.text_connected else R.string.text_not_connected)
             imageLock.visibility = if (wifiAp.signal.authenticationNeeded) View.VISIBLE else View.GONE
             imageHidden.visibility = if (wifiAp.signal.isHidden) View.VISIBLE else View.GONE
 
@@ -84,7 +86,7 @@ class SignalMeterFragment : Fragment() {
                 connInfoLayout.visibility = View.VISIBLE
                 imageConnected.visibility = View.VISIBLE
                 textWifiName.text = wifiAp.signal.ssid
-                textSpeed.text = "${connInfo?.linkSpeed} Mbps"
+                textSpeed.text = "%d %s".format(connInfo?.linkSpeed, WifiInfo.LINK_SPEED_UNITS)
                 textIp.text = connInfo?.ipAddress
                 textDns1.text = connInfo?.dns1
                 textDns2.text = connInfo?.dns2
@@ -99,12 +101,13 @@ class SignalMeterFragment : Fragment() {
             signalGauge.currentNumber = 0
             textPercent.text = "0"
             textRssi.text = "0"
-            textSignalSummary.text = "No Signal"
-            textSsid.text = "<select wifi>"
-            textBssid.text = "02:00:00:00:00:00"
+            textSignalSummary.setText(R.string.no_signal)
+            textSsid.text = getString(R.string.select_wifi)
+            textBssid.text = getString(R.string.default_mac)
             textManufacture.text = "-"
-            textConnection.text = "Cannot detect wifi signal"
-            textFreq.text = "- MHz,  Ch: -"
+            textConnection.text = getString(R.string.cannot_detect)
+            textFreq.text = "0"
+            textChannel.text = "0"
             textCapabilities.text = "[]"
             connInfoLayout.visibility = View.GONE
             imageLock.visibility = View.GONE

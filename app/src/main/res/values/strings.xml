@@ -3,4 +3,38 @@
 
     <string name="nav_drawer_open">Navigation Drawer Open</string>
     <string name="nav_drawer_close">Navigation Drawer Close</string>
+
+    <string name="hidden_wifi"><![CDATA[<hidden wifi>]]></string>
+    <string name="text_connected">Connected</string>
+    <string name="text_not_connected">Not connected</string>
+    <string name="no_signal">No Signal</string>
+    <string name="select_wifi"><![CDATA[<select wifi>]]></string>
+    <string name="default_mac">00:00:00:00:00:00</string>
+    <string name="cannot_detect">Cannot detect wifi signal</string>
+    <string name="percent">%d %</string>
+    <string name="freq_unit">MHz</string>
+    <string name="channel">Channel</string>
+    <string name="rssi_unit">dBm</string>
+    <string name="capabilities">Capabilities</string>
+    <string name="connection_info">Connection Info</string>
+
+    <string name="info_name">Name</string>
+    <string name="info_link_speed">Link Speed</string>
+    <string name="info_ip_address">IP Address</string>
+    <string name="info_gateway">Gateway</string>
+    <string name="info_netmask">Netmask</string>
+    <string name="info_dns_1">DNS 1</string>
+    <string name="info_dns_2">DNS 2</string>
+    <string name="info_dhcp_server">DHCP Server</string>
+
+    <string name="signal_poor">Poor</string>
+    <string name="signal_fair">Fair</string>
+    <string name="signal_good">Good</string>
+    <string name="signal_excellent">Excellent</string>
+    <string name="menu_signal_meter">Signal Meter</string>
+    <string name="menu_ap_list">Access Point List</string>
+
+    <string name="title_wifi_signal_meter">Wifi Signal Meter</string>
+    <string name="title_wifi_ap_list">Wifi List</string>
+    <string name="title_select_wifi">Select Wifi</string>
 </resources>

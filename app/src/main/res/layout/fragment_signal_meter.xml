@@ -127,19 +127,19 @@
                 android:text="-55"
                 android:textColor="@color/text_secondary"
                 android:textSize="34dp"
-                app:layout_constraintStart_toStartOf="@+id/signalGauge"
-                app:layout_constraintTop_toBottomOf="@id/textPercent"/>
+                app:layout_constraintStart_toStartOf="@id/signalGauge"
+                app:layout_constraintTop_toBottomOf="@+id/textPercent"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:text="dBm"
+                android:text="@string/rssi_unit"
                 android:textColor="@color/text_secondary"
                 android:textSize="26dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textRssi"
-                app:layout_constraintStart_toEndOf="@+id/textRssi"/>
+                app:layout_constraintBottom_toBottomOf="@id/textRssi"
+                app:layout_constraintStart_toEndOf="@id/textRssi"/>
 
         </android.support.constraint.ConstraintLayout>
 
@@ -169,11 +169,38 @@
 
             <TextView
                 android:id="@+id/textFreq"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
-                android:text="0 MHz"/>
+                android:text="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:text="@string/freq_unit"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:text="@string/channel"/>
+
+            <TextView
+                android:id="@+id/textChannel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:text="0"/>
         </LinearLayout>
 
         <LinearLayout
@@ -188,7 +215,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="Capabilities"/>
+                android:text="@string/capabilities"/>
             <ImageView
                 android:id="@+id/imageLock"
                 android:layout_width="18dp"
@@ -243,7 +270,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="12dp"
                 android:layout_gravity="center_horizontal"
-                android:text="Connection Info"
+                android:text="@string/connection_info"
                 android:textSize="18sp"
                 android:textColor="#4b4b4b"/>
 
@@ -265,7 +292,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
                     android:textSize="15sp"
-                    android:text="Name"/>
+                    android:text="@string/info_name"/>
 
                 <TextView
                     android:id="@+id/textWifiName"
@@ -289,7 +316,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="Link Speed"/>
+                    android:text="@string/info_link_speed"/>
 
                 <TextView
                     android:id="@+id/textSpeed"
@@ -311,7 +338,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="IP Address"/>
+                    android:text="@string/info_ip_address"/>
 
                 <TextView
                     android:id="@+id/textIp"
@@ -333,7 +360,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="Gateway"/>
+                    android:text="@string/info_gateway"/>
 
                 <TextView
                     android:id="@+id/textGateway"
@@ -355,7 +382,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="Netmask"/>
+                    android:text="@string/info_netmask"/>
 
                 <TextView
                     android:id="@+id/textNetmask"
@@ -377,7 +404,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="DNS 1"/>
+                    android:text="@string/info_dns_1"/>
 
                 <TextView
                     android:id="@+id/textDns1"
@@ -399,7 +426,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="DNS 2"/>
+                    android:text="@string/info_dns_2"/>
 
                 <TextView
                     android:id="@+id/textDns2"
@@ -421,7 +448,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
-                    android:text="DHCP Server"/>
+                    android:text="@string/info_dhcp_server"/>
 
                 <TextView
                     android:id="@+id/textServerAddress"

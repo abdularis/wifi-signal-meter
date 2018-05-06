@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToSignalMeter() {
-        supportActionBar?.title = "Wifi Signal Meter"
+        supportActionBar?.title = getString(R.string.title_wifi_signal_meter)
         currentFragmentTag = TAG_SIGNAL_METER
         supportFragmentManager.beginTransaction()
                 .replace(R.id.content_layout, SignalMeterFragment())
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToWifiList() {
-        supportActionBar?.title = "Wifi List"
+        supportActionBar?.title = getString(R.string.title_wifi_ap_list)
         currentFragmentTag = TAG_WIFI_LIST
         supportFragmentManager.beginTransaction()
                 .replace(R.id.content_layout, WifiListFragment())

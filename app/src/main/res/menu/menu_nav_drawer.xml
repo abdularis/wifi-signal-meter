@@ -3,11 +3,11 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item android:id="@+id/menu_signal_meter"
-              android:title="Signal Meter"
+              android:title="@string/menu_signal_meter"
               android:icon="@drawable/ic_signal_meter"
               app:showAsAction="never"/>
         <item android:id="@+id/menu_wifi_list"
-              android:title="Access Point List"
+              android:title="@string/menu_ap_list"
               android:icon="@drawable/ic_wifi_ap_list"/>
     </group>
 </menu>

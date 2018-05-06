@@ -1,7 +1,6 @@
 package com.github.abdularis.wifisignalmeter.wifiselector
 
 
-import android.net.wifi.WifiManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View

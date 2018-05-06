@@ -21,11 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </FrameLayout>
-        <!--<fragment-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:name="com.github.abdularis.wifisignalmeter.wifilist.WifiListFragment"-->
-            <!--android:id="@+id/fragment"/>-->
 
     </LinearLayout>
 

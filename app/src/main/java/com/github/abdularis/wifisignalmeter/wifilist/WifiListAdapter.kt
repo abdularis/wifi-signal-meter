@@ -1,6 +1,5 @@
 package com.github.abdularis.wifisignalmeter.wifilist
 
-import android.net.wifi.WifiManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +31,7 @@ class WifiListAdapter: RecyclerView.Adapter<WifiListAdapter.ViewHolder>() {
         var textSsid: TextView = itemView.findViewById(R.id.textSsid)
         var textBssid: TextView = itemView.findViewById(R.id.textBssid)
         var signalGauge: LinearGaugeView = itemView.findViewById(R.id.signalGauge)
-        var textPercent: TextView = itemView.findViewById(R.id.textPercent)
+        var textRssi: TextView = itemView.findViewById(R.id.textRssi)
         var textFreq: TextView = itemView.findViewById(R.id.textFreq)
         var itemContainer: View = itemView.findViewById(R.id.itemContainer)
 
@@ -41,8 +40,8 @@ class WifiListAdapter: RecyclerView.Adapter<WifiListAdapter.ViewHolder>() {
             textSsid.text = wifiAp.signal.ssid
             textBssid.text = wifiAp.signal.bssid
             signalGauge.currentNumber = levelPercent
-            textPercent.text = "$levelPercent%"
-            textFreq.text = "${wifiAp.signal.channel.frequency} MHz"
+            textRssi.text = wifiAp.signal.level.toString()
+            textFreq.text = wifiAp.signal.channel.frequency.toString()
             itemContainer.setOnClickListener { v ->
                 onItemClickListener?.onItemClick(wifiAp)
             }
