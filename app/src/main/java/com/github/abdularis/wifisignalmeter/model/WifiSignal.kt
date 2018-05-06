@@ -5,4 +5,6 @@ data class WifiSignal(val bssid: String,
                       val capabilities: String,
                       val channel: WifiChannel,
                       val level: Int,
-                      val vendor: String)
+                      val vendor: String) {
+    val authenticationNeeded: Boolean = capabilities.findAnyOf(listOf("WEP", "WPA"), ignoreCase = true) != null
+}

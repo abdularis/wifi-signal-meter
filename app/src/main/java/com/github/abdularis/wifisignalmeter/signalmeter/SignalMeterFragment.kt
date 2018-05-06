@@ -76,7 +76,9 @@ class SignalMeterFragment : Fragment() {
             textBssid.text = wifiAp.signal.bssid
             textManufacture.text = wifiAp.signal.vendor
             textFreq.text = "${wifiAp.signal.channel.frequency} MHz,  Ch: ${wifiAp.signal.channel.channelNumber}"
+            textCapabilities.text = wifiAp.signal.capabilities
             textConnection.text = if (wifiAp.isConnected) "Connected" else "Not connected"
+            imageLock.visibility = if (wifiAp.signal.authenticationNeeded) View.VISIBLE else View.GONE
 
             if (wifiAp.isConnected) {
                 val connInfo = wifiAp.connectionInfo
