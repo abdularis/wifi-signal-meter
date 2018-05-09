@@ -40,6 +40,10 @@ class WifiListAdapter: RecyclerView.Adapter<WifiListAdapter.ViewHolder>() {
         var imageLock: ImageView = itemView.findViewById(R.id.imageLock)
         var itemContainer: View = itemView.findViewById(R.id.itemContainer)
 
+        init {
+            signalGauge.enableAnimation = false
+        }
+
         fun bind(onItemClickListener: OnItemClickListener?, wifiAp: WifiAccessPoint) {
             val levelPercent = calcSignalPercentage(wifiAp.signal.level)
             if (wifiAp.signal.isHidden) {
@@ -53,7 +57,7 @@ class WifiListAdapter: RecyclerView.Adapter<WifiListAdapter.ViewHolder>() {
                 textSsid.setTextColor(ContextCompat.getColor(textSsid.context, R.color.connected_wifi))
             }
             imageLock.visibility = if (wifiAp.signal.authenticationNeeded) View.VISIBLE else View.GONE
-            textBssid.text = wifiAp.signal.bssid
+            textBssid.text = "(${wifiAp.signal.bssid})"
             signalGauge.currentNumber = levelPercent
             textRssi.text = wifiAp.signal.level.toString()
             textVendor.text = wifiAp.signal.vendor
