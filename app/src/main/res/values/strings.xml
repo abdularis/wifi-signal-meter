@@ -32,9 +32,12 @@
     <string name="signal_good">Good</string>
     <string name="signal_excellent">Excellent</string>
     <string name="menu_signal_meter">Signal Meter</string>
+    <string name="menu_time_graph">Time Graph</string>
     <string name="menu_ap_list">Access Point List</string>
 
     <string name="title_wifi_signal_meter">Wifi Signal Meter</string>
     <string name="title_wifi_ap_list">Wifi List</string>
     <string name="title_select_wifi">Select Wifi</string>
+    <string name="title_time_graph">Time Graph</string>
+    <string name="signal_strength_label">Signal strength (dBm)</string>
 </resources>

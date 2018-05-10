@@ -6,6 +6,9 @@
               android:title="@string/menu_signal_meter"
               android:icon="@drawable/ic_signal_meter"
               app:showAsAction="never"/>
+        <item android:id="@+id/menu_time_graph"
+              android:title="@string/menu_time_graph"
+            android:icon="@drawable/ic_time_graph"/>
         <item android:id="@+id/menu_wifi_list"
               android:title="@string/menu_ap_list"
               android:icon="@drawable/ic_wifi_ap_list"/>

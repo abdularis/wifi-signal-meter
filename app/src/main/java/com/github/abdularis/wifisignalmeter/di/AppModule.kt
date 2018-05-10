@@ -7,6 +7,7 @@ import com.github.abdularis.wifisignalmeter.data.DbHelper
 import com.github.abdularis.wifisignalmeter.data.VendorFinder
 import com.github.abdularis.wifisignalmeter.signalmeter.SignalMeterViewModel
 import com.github.abdularis.wifisignalmeter.signalmeter.WifiSignalProvider
+import com.github.abdularis.wifisignalmeter.timegraph.SignalTimeGraphViewModel
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListViewModel
 import dagger.Module
 import dagger.Provides
@@ -20,8 +21,10 @@ class AppModule(private val application : Application) {
 
     @Provides
     @Singleton
-    fun provideViewModelFactor(signalMeterViewModel: SignalMeterViewModel, wifiListViewModel: WifiListViewModel) : ViewModelFactory {
-        return ViewModelFactory(signalMeterViewModel, wifiListViewModel)
+    fun provideViewModelFactor(signalMeterViewModel: SignalMeterViewModel,
+                               wifiListViewModel: WifiListViewModel,
+                               signalTimeGraphViewModel: SignalTimeGraphViewModel) : ViewModelFactory {
+        return ViewModelFactory(signalMeterViewModel, wifiListViewModel, signalTimeGraphViewModel)
     }
 
     @Provides
@@ -40,5 +43,11 @@ class AppModule(private val application : Application) {
     @Singleton
     fun provideWifiListViewModel(ctx: Context, wifiSignalProvider: WifiSignalProvider): WifiListViewModel {
         return WifiListViewModel(wifiSignalProvider)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSignalTimeGraphViewModel(ctx: Context, wifiSignalProvider: WifiSignalProvider): SignalTimeGraphViewModel {
+        return SignalTimeGraphViewModel(wifiSignalProvider)
     }
 }

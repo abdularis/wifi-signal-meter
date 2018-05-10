@@ -1,6 +1,7 @@
 package com.github.abdularis.wifisignalmeter.di
 
 import com.github.abdularis.wifisignalmeter.signalmeter.SignalMeterFragment
+import com.github.abdularis.wifisignalmeter.timegraph.SignalTimeGraphFragment
 import com.github.abdularis.wifisignalmeter.wifiselector.WifiSelectorActivity
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListFragment
 import dagger.Component
@@ -12,4 +13,5 @@ interface AppComponent {
     fun inject(client: SignalMeterFragment)
     fun inject(client: WifiListFragment)
     fun inject(client: WifiSelectorActivity)
+    fun inject(client: SignalTimeGraphFragment)
 }
