@@ -34,11 +34,23 @@
     <string name="menu_signal_meter">Signal Meter</string>
     <string name="menu_time_graph">Time Graph</string>
     <string name="menu_ap_list">Access Point List</string>
+    <string name="menu_about">About</string>
 
     <string name="title_wifi_signal_meter">Wifi Signal Meter</string>
     <string name="title_wifi_ap_list">Wifi List</string>
     <string name="title_select_wifi">Select Wifi</string>
     <string name="title_time_graph">Time Graph</string>
+    <string name="title_about">About</string>
     <string name="signal_strength_label">Signal strength (dBm)</string>
     <string name="empty_wifi_list">No wifi signal in range</string>
+
+    <string name="description">Simple, beautiful and reliable wifi tools to help you spot the best wifi signal, analyze and discover hidden access point</string>
+    <string name="copyright">Copyright © 2018 - A Aris R</string>
+    <string name="license_gaugeview">GaugeView - https://github.com/abdularis/GaugeView</string>
+    <string name="license_mpandroidchart">MPAndroidChart - https://github.com/PhilJay/MPAndroidChart</string>
+    <string name="license_sqliteassethelper">sqliteassethelper - https://github.com/jgilfelt/android-sqlite-asset-helper</string>
+    <string name="license_rxjava">rxjava2 - https://github.com/ReactiveX/RxJava</string>
+    <string name="license_rxandroid">rxandroid2 - https://github.com/ReactiveX/RxAndroid</string>
+    <string name="license_dagger">dagger2 - https://github.com/google/dagger</string>
+    <string name="licenses">Licenses</string>
 </resources>

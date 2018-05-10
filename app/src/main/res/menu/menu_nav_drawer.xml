@@ -13,4 +13,9 @@
               android:title="@string/menu_ap_list"
               android:icon="@drawable/ic_wifi_ap_list"/>
     </group>
+    <group android:id="@+id/group2">
+        <item android:id="@+id/menu_about"
+              android:title="@string/menu_about"
+              android:icon="@drawable/ic_about"/>
+    </group>
 </menu>
