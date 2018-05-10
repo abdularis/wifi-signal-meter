@@ -3,6 +3,7 @@ package com.aar.app.wifinetanalyzer
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -16,14 +17,10 @@ import kotlinx.android.synthetic.main.partial_toolbar.*
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        const val STATE_CURRENT_FRAGMENT = "CURRENT_FRAGMENT"
-
-        const val TAG_SIGNAL_METER = "SIGNAL_METER"
-        const val TAG_WIFI_LIST = "WIFI_LIST"
-        const val TAG_TIME_GRAPH = "TIME_GRAPH"
+        private const val STATE_CURRENT_FRAGMENT = "CURRENT_FRAGMENT"
     }
 
-    private var currentFragmentTag = TAG_SIGNAL_METER
+    private var currentFragment = R.id.menu_signal_meter
     private lateinit var navigationDrawerToggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,16 +33,15 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(navigationDrawerToggle)
         navigationView.setNavigationItemSelectedListener(this::selectNavItem)
 
-        var menuId = R.id.menu_signal_meter
         savedInstanceState?.let {
-            currentFragmentTag = it.getString(STATE_CURRENT_FRAGMENT, TAG_SIGNAL_METER)
-            menuId = when(currentFragmentTag) {
-                TAG_WIFI_LIST -> R.id.menu_wifi_list
-                TAG_TIME_GRAPH -> R.id.menu_time_graph
-                else -> R.id.menu_signal_meter
-            }
+            currentFragment = it.getInt(STATE_CURRENT_FRAGMENT, currentFragment)
         }
-        selectNavItem(navigationView.menu.findItem(menuId))
+        goToScreen(currentFragment, animate = false)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putInt(STATE_CURRENT_FRAGMENT, currentFragment)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -53,67 +49,52 @@ class MainActivity : AppCompatActivity() {
         navigationDrawerToggle.syncState()
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        outState?.putString(STATE_CURRENT_FRAGMENT, currentFragmentTag)
-    }
-
     override fun onBackPressed() {
         when {
             drawerLayout.isDrawerOpen(GravityCompat.START) -> drawerLayout.closeDrawers()
-            currentFragmentTag != TAG_SIGNAL_METER -> selectNavItem(navigationView.menu.findItem(R.id.menu_signal_meter))
+            currentFragment != R.id.menu_signal_meter -> goToSignalMeter()
             else -> super.onBackPressed()
         }
     }
 
     private fun selectNavItem(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_signal_meter -> {
-                item.isChecked = true
-                goToSignalMeter()
-            }
-            R.id.menu_wifi_list -> {
-                item.isChecked = true
-                goToWifiList()
-            }
-            R.id.menu_time_graph -> {
-                item.isChecked = true
-                goToTimeGraph()
-            }
-            R.id.menu_about -> {
-                goToAbout()
-            }
-        }
-
+        goToScreen(item.itemId)
         drawerLayout.closeDrawers()
         return true
     }
 
-    private fun goToSignalMeter() {
+    private fun replaceFragment(fragment: Fragment, menuId: Int, animate: Boolean = true) {
+        currentFragment = menuId
+        navigationView.menu.findItem(menuId).isChecked = true
+        val transaction = supportFragmentManager.beginTransaction()
+        if (animate) transaction.setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
+        transaction
+                .replace(R.id.content_layout, fragment)
+                .commit()
+    }
+
+    private fun goToScreen(itemId: Int, animate: Boolean = true) {
+        when (itemId) {
+            R.id.menu_signal_meter -> goToSignalMeter(animate)
+            R.id.menu_wifi_list -> goToWifiList(animate)
+            R.id.menu_time_graph -> goToTimeGraph(animate)
+            R.id.menu_about -> goToAbout()
+        }
+    }
+
+    private fun goToSignalMeter(animate: Boolean = true) {
         supportActionBar?.title = getString(R.string.title_wifi_signal_meter)
-        currentFragmentTag = TAG_SIGNAL_METER
-        supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
-                .replace(R.id.content_layout, SignalMeterFragment())
-                .commit()
+        replaceFragment(SignalMeterFragment(), R.id.menu_signal_meter, animate)
     }
 
-    private fun goToWifiList() {
+    private fun goToWifiList(animate: Boolean = true) {
         supportActionBar?.title = getString(R.string.title_wifi_ap_list)
-        currentFragmentTag = TAG_WIFI_LIST
-        supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
-                .replace(R.id.content_layout, WifiListFragment())
-                .commit()
+        replaceFragment(WifiListFragment(), R.id.menu_wifi_list, animate)
     }
 
-    private fun goToTimeGraph() {
+    private fun goToTimeGraph(animate: Boolean = true) {
         supportActionBar?.title = getString(R.string.title_time_graph)
-        currentFragmentTag = TAG_TIME_GRAPH
-        supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
-                .replace(R.id.content_layout, SignalTimeGraphFragment())
-                .commit()
+        replaceFragment(SignalTimeGraphFragment(), R.id.menu_time_graph, animate)
     }
 
     private fun goToAbout() {
