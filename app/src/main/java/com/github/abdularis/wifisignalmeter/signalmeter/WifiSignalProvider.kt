@@ -29,7 +29,7 @@ class WifiSignalProvider(context: Context, private val vendorFinder: VendorFinde
                         wifiManager.startScan()
                         Flowable.fromIterable(wifiManager.scanResults)
                                 .map(this::createWifiAp)
-                                .toList()
+                                .toSortedList { a, b -> b.signal.ssid.compareTo(a.signal.ssid) }
                                 .toFlowable()
                     }
         }
