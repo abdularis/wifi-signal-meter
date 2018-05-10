@@ -1,15 +1,15 @@
 package com.github.abdularis.wifisignalmeter
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
+import com.github.abdularis.wifisignalmeter.about.AboutActivity
 import com.github.abdularis.wifisignalmeter.signalmeter.SignalMeterFragment
 import com.github.abdularis.wifisignalmeter.timegraph.SignalTimeGraphFragment
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListFragment
-import com.github.abdularis.wifisignalmeter.wifilist.WifiListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.partial_toolbar.*
 
@@ -80,6 +80,9 @@ class MainActivity : AppCompatActivity() {
                 item.isChecked = true
                 goToTimeGraph()
             }
+            R.id.menu_about -> {
+                goToAbout()
+            }
         }
 
         drawerLayout.closeDrawers()
@@ -108,5 +111,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.content_layout, SignalTimeGraphFragment())
                 .commit()
+    }
+
+    private fun goToAbout() {
+        val intent = Intent(this, AboutActivity::class.java)
+        startActivity(intent)
     }
 }

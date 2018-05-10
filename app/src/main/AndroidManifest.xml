@@ -23,6 +23,7 @@
         </activity>
         <activity android:name="com.github.abdularis.wifisignalmeter.wifiselector.WifiSelectorActivity">
         </activity>
+        <activity android:name=".about.AboutActivity"/>
     </application>
 
 </manifest>
