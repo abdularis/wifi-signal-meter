@@ -75,12 +75,12 @@ class SignalTimeGraphFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.startUpdates()
+        viewModel.startSignalUpdate()
     }
 
     override fun onPause() {
         super.onPause()
-        viewModel.stopUpdates()
+        viewModel.stopSignalUpdate()
     }
 
     private fun updateGraph(data: Collection<Float>) {

@@ -46,12 +46,12 @@ class SignalMeterFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.startWifiUpdates()
+        viewModel.startSignalUpdate()
     }
 
     override fun onPause() {
         super.onPause()
-        viewModel.stopSignalUpdates()
+        viewModel.stopSignalUpdate()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
