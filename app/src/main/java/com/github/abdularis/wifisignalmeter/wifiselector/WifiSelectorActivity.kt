@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.view.MenuItem
+import android.view.View
 import com.github.abdularis.wifisignalmeter.App
 import com.github.abdularis.wifisignalmeter.R
 import com.github.abdularis.wifisignalmeter.ViewModelFactory
@@ -16,6 +16,7 @@ import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListAdapter
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListViewModel
 import kotlinx.android.synthetic.main.activity_wifi_selector.*
+import kotlinx.android.synthetic.main.partial_empty_wifi_list_item.*
 import kotlinx.android.synthetic.main.partial_toolbar.*
 import javax.inject.Inject
 
@@ -57,7 +58,7 @@ class WifiSelectorActivity : AppCompatActivity() {
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = wifiListAdapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        viewModel.wifiList.observe(this, Observer<List<WifiAccessPoint>> {v -> v?.let{ wifiListAdapter.wifiAp = it }})
+        viewModel.wifiList.observe(this, Observer { onWifiListUpdated(it) })
     }
 
     override fun onResume() {
@@ -68,5 +69,18 @@ class WifiSelectorActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         viewModel.stopListUpdate()
+    }
+
+    private fun onWifiListUpdated(wList: List<WifiAccessPoint>?) {
+        wList?.let {
+            if (it.isEmpty()) {
+                emptyListLayout.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            } else {
+                emptyListLayout.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+                wifiListAdapter.wifiAp = it
+            }
+        }
     }
 }

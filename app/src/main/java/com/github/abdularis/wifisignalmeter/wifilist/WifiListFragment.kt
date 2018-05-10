@@ -16,6 +16,7 @@ import com.github.abdularis.wifisignalmeter.ViewModelFactory
 import com.github.abdularis.wifisignalmeter.model.WifiAccessPoint
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_wifi_list.*
+import kotlinx.android.synthetic.main.partial_empty_wifi_list_item.*
 import javax.inject.Inject
 
 class WifiListFragment : Fragment() {
@@ -48,7 +49,7 @@ class WifiListFragment : Fragment() {
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = wifiListAdapter
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        viewModel.wifiList.observe(this, Observer<List<WifiAccessPoint>> {v -> v?.let{ wifiListAdapter.wifiAp = it }})
+        viewModel.wifiList.observe(this, Observer { onWifiListUpdated(it) })
     }
 
     override fun onResume() {
@@ -59,6 +60,19 @@ class WifiListFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         viewModel.stopListUpdate()
+    }
+
+    private fun onWifiListUpdated(wList: List<WifiAccessPoint>?) {
+        wList?.let {
+            if (it.isEmpty()) {
+                emptyListLayout.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            } else {
+                emptyListLayout.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+                wifiListAdapter.wifiAp = it
+            }
+        }
     }
 
     interface OnWifiItemClickListener {

@@ -40,4 +40,5 @@
     <string name="title_select_wifi">Select Wifi</string>
     <string name="title_time_graph">Time Graph</string>
     <string name="signal_strength_label">Signal strength (dBm)</string>
+    <string name="empty_wifi_list">No wifi signal in range</string>
 </resources>
