@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.title_wifi_signal_meter)
         currentFragmentTag = TAG_SIGNAL_METER
         supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
                 .replace(R.id.content_layout, SignalMeterFragment())
                 .commit()
     }
@@ -98,6 +99,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.title_wifi_ap_list)
         currentFragmentTag = TAG_WIFI_LIST
         supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
                 .replace(R.id.content_layout, WifiListFragment())
                 .commit()
     }
@@ -106,6 +108,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.title_time_graph)
         currentFragmentTag = TAG_TIME_GRAPH
         supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
                 .replace(R.id.content_layout, SignalTimeGraphFragment())
                 .commit()
     }
