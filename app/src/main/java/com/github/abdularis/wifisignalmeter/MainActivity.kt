@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import com.github.abdularis.wifisignalmeter.signalmeter.SignalMeterFragment
+import com.github.abdularis.wifisignalmeter.timegraph.SignalTimeGraphFragment
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListFragment
 import com.github.abdularis.wifisignalmeter.wifilist.WifiListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         const val TAG_SIGNAL_METER = "SIGNAL_METER"
         const val TAG_WIFI_LIST = "WIFI_LIST"
+        const val TAG_TIME_GRAPH = "TIME_GRAPH"
     }
 
     private var currentFragmentTag = TAG_SIGNAL_METER
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             currentFragmentTag = it.getString(STATE_CURRENT_FRAGMENT, TAG_SIGNAL_METER)
             menuId = when(currentFragmentTag) {
                 TAG_WIFI_LIST -> R.id.menu_wifi_list
+                TAG_TIME_GRAPH -> R.id.menu_time_graph
                 else -> R.id.menu_signal_meter
             }
         }
@@ -58,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         when {
             drawerLayout.isDrawerOpen(GravityCompat.START) -> drawerLayout.closeDrawers()
-            currentFragmentTag == TAG_WIFI_LIST -> selectNavItem(navigationView.menu.findItem(R.id.menu_signal_meter))
+            currentFragmentTag != TAG_SIGNAL_METER -> selectNavItem(navigationView.menu.findItem(R.id.menu_signal_meter))
             else -> super.onBackPressed()
         }
     }
@@ -72,6 +75,10 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_wifi_list -> {
                 item.isChecked = true
                 goToWifiList()
+            }
+            R.id.menu_time_graph -> {
+                item.isChecked = true
+                goToTimeGraph()
             }
         }
 
@@ -92,6 +99,14 @@ class MainActivity : AppCompatActivity() {
         currentFragmentTag = TAG_WIFI_LIST
         supportFragmentManager.beginTransaction()
                 .replace(R.id.content_layout, WifiListFragment())
+                .commit()
+    }
+
+    private fun goToTimeGraph() {
+        supportActionBar?.title = getString(R.string.title_time_graph)
+        currentFragmentTag = TAG_TIME_GRAPH
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.content_layout, SignalTimeGraphFragment())
                 .commit()
     }
 }
