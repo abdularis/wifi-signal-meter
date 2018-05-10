@@ -35,19 +35,19 @@ class AppModule(private val application : Application) {
 
     @Provides
     @Singleton
-    fun provideSignalMeterViewModel(ctx : Context, wifiSignalProvider: WifiSignalProvider) : SignalMeterViewModel {
+    fun provideSignalMeterViewModel(wifiSignalProvider: WifiSignalProvider) : SignalMeterViewModel {
         return SignalMeterViewModel(wifiSignalProvider)
     }
 
     @Provides
     @Singleton
-    fun provideWifiListViewModel(ctx: Context, wifiSignalProvider: WifiSignalProvider): WifiListViewModel {
+    fun provideWifiListViewModel(wifiSignalProvider: WifiSignalProvider): WifiListViewModel {
         return WifiListViewModel(wifiSignalProvider)
     }
 
     @Provides
     @Singleton
-    fun provideSignalTimeGraphViewModel(ctx: Context, wifiSignalProvider: WifiSignalProvider): SignalTimeGraphViewModel {
+    fun provideSignalTimeGraphViewModel(wifiSignalProvider: WifiSignalProvider): SignalTimeGraphViewModel {
         return SignalTimeGraphViewModel(wifiSignalProvider)
     }
 }
