@@ -3,6 +3,7 @@ package com.github.abdularis.wifisignalmeter.about
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.github.abdularis.wifisignalmeter.R
+import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.partial_toolbar.*
 
 class AboutActivity: AppCompatActivity() {
@@ -15,5 +16,8 @@ class AboutActivity: AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.title_about)
         toolbar.setNavigationOnClickListener { finish() }
+
+        val versionName = packageManager.getPackageInfo(packageName, 0)?.versionName ?: ""
+        textAppName.text = "%s - v%s".format(getString(R.string.app_name), versionName)
     }
 }
