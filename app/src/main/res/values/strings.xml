@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wifi Signal Meter</string>
+    <string name="app_name">Wifi Network Analyzer</string>
 
     <string name="nav_drawer_open">Navigation Drawer Open</string>
     <string name="nav_drawer_close">Navigation Drawer Close</string>
@@ -36,7 +36,7 @@
     <string name="menu_ap_list">Access Point List</string>
     <string name="menu_about">About</string>
 
-    <string name="title_wifi_signal_meter">Wifi Signal Meter</string>
+    <string name="title_wifi_signal_meter">Signal Meter</string>
     <string name="title_wifi_ap_list">Wifi List</string>
     <string name="title_select_wifi">Select Wifi</string>
     <string name="title_time_graph">Time Graph</string>
