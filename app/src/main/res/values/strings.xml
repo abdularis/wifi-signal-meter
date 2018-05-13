@@ -53,4 +53,6 @@
     <string name="license_rxandroid">rxandroid2 - https://github.com/ReactiveX/RxAndroid</string>
     <string name="license_dagger">dagger2 - https://github.com/google/dagger</string>
     <string name="licenses">Licenses</string>
+
+    <string name="empty_signal_meter">Wifi is out of range or haven\'t any selected yet.</string>
 </resources>

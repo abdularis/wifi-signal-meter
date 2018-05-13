@@ -18,6 +18,8 @@ import com.aar.app.wifinetanalyzer.common.percentToSignalLevel
 import com.aar.app.wifinetanalyzer.model.WifiAccessPoint
 import com.aar.app.wifinetanalyzer.wifiselector.WifiSelectorActivity
 import kotlinx.android.synthetic.main.fragment_signal_meter.*
+import kotlinx.android.synthetic.main.partial_empty_signal.*
+import kotlinx.android.synthetic.main.partial_signal_meter.*
 import javax.inject.Inject
 
 
@@ -63,12 +65,15 @@ class SignalMeterFragment : Fragment() {
 
     private fun onWifiSignalUpdate(wifiAp: WifiAccessPoint?) {
         if (wifiAp != null) {
+            signalMeterLayout.visibility = View.VISIBLE
+            emptySignalMeterLayout.visibility = View.GONE
+
             val levelPercent = calcSignalPercentage(wifiAp.signal.level)
 
             signalGauge.currentNumber = levelPercent
             textPercent.text = "$levelPercent"
             textRssi.text = "${wifiAp.signal.level}"
-            textSignalSummary.text = percentToSignalLevel(context?.resources, levelPercent)
+//            textSignalSummary.text = percentToSignalLevel(context?.resources, levelPercent)
             textSsid.text = if (wifiAp.signal.isHidden) getString(R.string.hidden_wifi) else wifiAp.signal.ssid
             textBssid.text = wifiAp.signal.bssid
             textManufacture.text = wifiAp.signal.vendor
@@ -97,19 +102,9 @@ class SignalMeterFragment : Fragment() {
                 imageConnected.visibility = View.GONE
             }
         } else {
-            signalGauge.currentNumber = 0
-            textPercent.text = "0"
-            textRssi.text = "0"
-            textSignalSummary.setText(R.string.no_signal)
+            signalMeterLayout.visibility = View.GONE
+            emptySignalMeterLayout.visibility = View.VISIBLE
             textSsid.text = getString(R.string.select_wifi)
-            textBssid.text = getString(R.string.default_mac)
-            textManufacture.text = "-"
-            textConnection.text = getString(R.string.cannot_detect)
-            textFreq.text = "0"
-            textChannel.text = "0"
-            textCapabilities.text = "[]"
-            connInfoLayout.visibility = View.GONE
-            imageLock.visibility = View.GONE
             imageHidden.visibility = View.GONE
         }
     }
