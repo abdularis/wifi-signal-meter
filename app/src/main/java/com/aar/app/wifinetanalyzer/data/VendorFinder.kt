@@ -2,6 +2,7 @@ package com.aar.app.wifinetanalyzer.data
 
 import android.content.Context
 import android.support.v4.util.LruCache
+import com.aar.app.wifinetanalyzer.ouilookup.OuiLookupResult
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper
 
 const val DB_NAME = "standard_ieee_oui.db"
@@ -33,6 +34,31 @@ class VendorFinder(private val dbHelper: DbHelper) {
 
         cache.put(mac, vendor)
         return vendor
+    }
+
+    fun searchByMac(mac: String, limit: Int = 16): List<OuiLookupResult> {
+        val queryText = "${mac.toUpperCase()}%"
+        return doOuiLookup("$COL_MAC like ?", arrayOf(queryText), limit)
+    }
+
+    fun searchByManufacturer(manufacturer: String, limit: Int = 16): List<OuiLookupResult> {
+        val queryText = "%$manufacturer%"
+        return doOuiLookup("$COL_VENDOR like ?", arrayOf(queryText), limit)
+    }
+
+    private fun doOuiLookup(selection: String?, selArgs: Array<String>, limit: Int): List<OuiLookupResult> {
+        val results = ArrayList<OuiLookupResult>()
+        val db = dbHelper.readableDatabase
+        val cursor = db.query(TABLE_NAME, arrayOf(COL_MAC, COL_VENDOR), selection, selArgs, null, null, null, limit.toString())
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast) {
+                results.add(OuiLookupResult(cursor.getString(0), cursor.getString(1)))
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+
+        return results
     }
 
 }

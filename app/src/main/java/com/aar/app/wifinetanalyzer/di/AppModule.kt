@@ -5,6 +5,7 @@ import android.content.Context
 import com.aar.app.wifinetanalyzer.ViewModelFactory
 import com.aar.app.wifinetanalyzer.data.DbHelper
 import com.aar.app.wifinetanalyzer.data.VendorFinder
+import com.aar.app.wifinetanalyzer.ouilookup.OuiLookupViewModel
 import com.aar.app.wifinetanalyzer.signalmeter.SignalMeterViewModel
 import com.aar.app.wifinetanalyzer.signalmeter.WifiSignalProvider
 import com.aar.app.wifinetanalyzer.timegraph.SignalTimeGraphViewModel
@@ -23,8 +24,9 @@ class AppModule(private val application : Application) {
     @Singleton
     fun provideViewModelFactor(signalMeterViewModel: SignalMeterViewModel,
                                wifiListViewModel: WifiListViewModel,
-                               signalTimeGraphViewModel: SignalTimeGraphViewModel) : ViewModelFactory {
-        return ViewModelFactory(signalMeterViewModel, wifiListViewModel, signalTimeGraphViewModel)
+                               signalTimeGraphViewModel: SignalTimeGraphViewModel,
+                               ouiLookupViewModel: OuiLookupViewModel) : ViewModelFactory {
+        return ViewModelFactory(signalMeterViewModel, wifiListViewModel, signalTimeGraphViewModel, ouiLookupViewModel)
     }
 
     @Provides
@@ -49,5 +51,11 @@ class AppModule(private val application : Application) {
     @Singleton
     fun provideSignalTimeGraphViewModel(wifiSignalProvider: WifiSignalProvider): SignalTimeGraphViewModel {
         return SignalTimeGraphViewModel(wifiSignalProvider)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOuiLookupViewModel(ctx: Context): OuiLookupViewModel {
+        return OuiLookupViewModel(VendorFinder(DbHelper(ctx)))
     }
 }

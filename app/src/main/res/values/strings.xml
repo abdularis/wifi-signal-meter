@@ -34,12 +34,14 @@
     <string name="menu_signal_meter">Signal Meter</string>
     <string name="menu_time_graph">Time Graph</string>
     <string name="menu_ap_list">Access Point List</string>
+    <string name="menu_oui_lookup">OUI Lookup</string>
     <string name="menu_about">About</string>
 
     <string name="title_wifi_signal_meter">Signal Meter</string>
     <string name="title_wifi_ap_list">Wifi List</string>
     <string name="title_select_wifi">Select Wifi</string>
     <string name="title_time_graph">Time Graph</string>
+    <string name="title_oui_lookup">OUI Lookup</string>
     <string name="title_about">About</string>
     <string name="signal_strength_label">Signal strength (dBm)</string>
     <string name="empty_wifi_list">No wifi signal in range</string>
@@ -55,4 +57,10 @@
     <string name="licenses">Licenses</string>
 
     <string name="empty_signal_meter">Wifi is out of range or haven\'t any selected yet.</string>
+
+    <string name="oui_search_message">OUI (Organizationally Unique Identifier) lookup. examples: E0:43:DB or by manufacturer Intel, Asus etc.</string>
+    <string name="search_by_mac">Search by MAC address</string>
+    <string name="search_by_manufact">Search by Manufacturer</string>
+    <string name="lbl_search_mac">MAC Address</string>
+    <string name="lbl_search_manufact">Manufacturer</string>
 </resources>

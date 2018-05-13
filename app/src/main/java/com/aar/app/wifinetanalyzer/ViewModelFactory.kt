@@ -2,6 +2,7 @@ package com.aar.app.wifinetanalyzer
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.aar.app.wifinetanalyzer.ouilookup.OuiLookupViewModel
 import com.aar.app.wifinetanalyzer.signalmeter.SignalMeterViewModel
 import com.aar.app.wifinetanalyzer.timegraph.SignalTimeGraphViewModel
 import com.aar.app.wifinetanalyzer.wifilist.WifiListViewModel
@@ -10,7 +11,8 @@ import javax.inject.Inject
 class ViewModelFactory @Inject constructor(
         private val signalMeterViewModel: SignalMeterViewModel,
         private val wifiListViewModel: WifiListViewModel,
-        private val signalTimeGraphViewModel: SignalTimeGraphViewModel
+        private val signalTimeGraphViewModel: SignalTimeGraphViewModel,
+        private val ouiLookupViewModel: OuiLookupViewModel
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -21,6 +23,8 @@ class ViewModelFactory @Inject constructor(
             return wifiListViewModel as T
         else if (modelClass.isAssignableFrom(SignalTimeGraphViewModel::class.java))
             return signalTimeGraphViewModel as T
+        else if (modelClass.isAssignableFrom(OuiLookupViewModel::class.java))
+            return ouiLookupViewModel as T
         throw IllegalArgumentException("Unknown view model")
     }
 }
