@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.aar.app.wifinetanalyzer.R
+import com.aar.app.wifinetanalyzer.model.OuiLookupResult
 
 class OuiListAdapter: RecyclerView.Adapter<OuiListAdapter.ViewHolder>() {
 

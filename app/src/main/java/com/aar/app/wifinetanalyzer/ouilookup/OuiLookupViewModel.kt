@@ -3,6 +3,7 @@ package com.aar.app.wifinetanalyzer.ouilookup
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.aar.app.wifinetanalyzer.data.VendorFinder
+import com.aar.app.wifinetanalyzer.model.OuiLookupResult
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers

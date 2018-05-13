@@ -2,7 +2,7 @@ package com.aar.app.wifinetanalyzer.data
 
 import android.content.Context
 import android.support.v4.util.LruCache
-import com.aar.app.wifinetanalyzer.ouilookup.OuiLookupResult
+import com.aar.app.wifinetanalyzer.model.OuiLookupResult
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper
 
 const val DB_NAME = "standard_ieee_oui.db"
