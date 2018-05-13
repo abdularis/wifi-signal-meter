@@ -56,6 +56,7 @@ class OuiLookupFragment: Fragment() {
 
         buttonClear.setOnClickListener { textSearch.setText("") }
 
+        textSearch.setText(viewModel.currentKeyword)
         textSearch.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
 
