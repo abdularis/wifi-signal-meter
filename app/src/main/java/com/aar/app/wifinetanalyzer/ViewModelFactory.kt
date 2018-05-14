@@ -17,14 +17,12 @@ class ViewModelFactory @Inject constructor(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(SignalMeterViewModel::class.java))
-            return signalMeterViewModel as T
-        else if (modelClass.isAssignableFrom(WifiListViewModel::class.java))
-            return wifiListViewModel as T
-        else if (modelClass.isAssignableFrom(SignalTimeGraphViewModel::class.java))
-            return signalTimeGraphViewModel as T
-        else if (modelClass.isAssignableFrom(OuiLookupViewModel::class.java))
-            return ouiLookupViewModel as T
-        throw IllegalArgumentException("Unknown view model")
+        return when {
+            modelClass.isAssignableFrom(SignalMeterViewModel::class.java) -> signalMeterViewModel as T
+            modelClass.isAssignableFrom(WifiListViewModel::class.java) -> wifiListViewModel as T
+            modelClass.isAssignableFrom(SignalTimeGraphViewModel::class.java) -> signalTimeGraphViewModel as T
+            modelClass.isAssignableFrom(OuiLookupViewModel::class.java) -> ouiLookupViewModel as T
+            else -> throw IllegalArgumentException("Unknown view model")
+        }
     }
 }
