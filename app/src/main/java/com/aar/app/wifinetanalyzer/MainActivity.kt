@@ -59,7 +59,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun selectNavItem(item: MenuItem): Boolean {
-        goToScreen(item.itemId)
+        if (item.itemId != currentFragment) {
+            goToScreen(item.itemId)
+        }
         drawerLayout.closeDrawers()
         return true
     }
