@@ -63,4 +63,7 @@
     <string name="search_by_manufact">Search by Manufacturer</string>
     <string name="lbl_search_mac">MAC Address</string>
     <string name="lbl_search_manufact">Manufacturer</string>
+    <string name="interfering_channel">Interfering Channels</string>
+    <string name="non_interfering_channel">Other Channels</string>
+    <string name="connected_wifi">Connected Wifi</string>
 </resources>

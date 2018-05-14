@@ -49,7 +49,9 @@ class WifiListFragment : Fragment() {
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = wifiListAdapter
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        viewModel.wifiList.observe(this, Observer { onWifiListUpdated(it) })
+        viewModel.wifiAccessPointList.observe(this, Observer {
+            onWifiListUpdated(it)
+        })
     }
 
     override fun onResume() {
@@ -62,15 +64,15 @@ class WifiListFragment : Fragment() {
         viewModel.stopListUpdate()
     }
 
-    private fun onWifiListUpdated(wList: List<WifiAccessPoint>?) {
-        wList?.let {
-            if (it.isEmpty()) {
+    private fun onWifiListUpdated(wifiApList: WifiAccessPointList?) {
+        wifiApList?.let {
+            if (it.wifiList.isEmpty()) {
                 emptyListLayout.visibility = View.VISIBLE
                 recyclerView.visibility = View.GONE
             } else {
                 emptyListLayout.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
-                wifiListAdapter.wifiAp = it
+                wifiListAdapter.replaceData(it)
             }
         }
     }

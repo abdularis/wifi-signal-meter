@@ -12,23 +12,85 @@ import com.aar.app.wifinetanalyzer.R
 import com.aar.app.wifinetanalyzer.common.calcSignalPercentage
 import com.aar.app.wifinetanalyzer.model.WifiAccessPoint
 
-class WifiListAdapter: RecyclerView.Adapter<WifiListAdapter.ViewHolder>() {
+class WifiListAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        private const val TYPE_ITEM_WIFI_ACCESS_POINT = 1
+        private const val TYPE_ITEM_HEADER = 2
+    }
 
     var onItemClickListener: OnItemClickListener? = null
-    var wifiAp: List<WifiAccessPoint> = ArrayList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
+    private val data: ArrayList<Any> = ArrayList()
+
+    private fun addConnectedWifiAp(wifiAp: WifiAccessPoint) {
+        data.add(WifiItemHeader(R.string.connected_wifi))
+        data.add(wifiAp)
+    }
+
+    private fun addInterferingWifiAps(wifiAps: List<WifiAccessPoint>) {
+        data.add(WifiItemHeader(R.string.interfering_channel))
+        data.addAll(wifiAps)
+    }
+
+    private fun addNonInterferingWifiAps(wifiAps: List<WifiAccessPoint>) {
+        data.add(WifiItemHeader(R.string.non_interfering_channel))
+        data.addAll(wifiAps)
+    }
+
+    fun replaceData(wifiAps: List<WifiAccessPoint>) {
+        data.clear()
+        data.addAll(wifiAps)
+        notifyDataSetChanged()
+    }
+
+    fun replaceData(wifiAccessPointList: WifiAccessPointList) {
+        data.clear()
+        if (wifiAccessPointList.connectedWifi == null) {
+            data.add(WifiItemHeader(R.string.text_not_connected))
+            data.addAll(wifiAccessPointList.wifiList)
+        } else {
+            wifiAccessPointList.connectedWifi.let { addConnectedWifiAp(it) }
+            addInterferingWifiAps(wifiAccessPointList.interferingWifiList)
+            addNonInterferingWifiAps(wifiAccessPointList.otherWifiList)
         }
+        notifyDataSetChanged()
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_wifi, parent, false))
+    override fun getItemCount(): Int = data.size
 
-    override fun getItemCount(): Int = wifiAp.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(onItemClickListener, wifiAp[position])
+        return if (viewType == TYPE_ITEM_WIFI_ACCESS_POINT) {
+            WifiApViewHolder(inflater.inflate(R.layout.item_wifi, parent, false))
+        } else {
+            WifiItemHeaderViewHolder(inflater.inflate(R.layout.item_wifi_header, parent, false))
+        }
+    }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder.itemViewType == TYPE_ITEM_WIFI_ACCESS_POINT) {
+            (holder as WifiApViewHolder).bind(onItemClickListener, data[position] as WifiAccessPoint)
+        } else if (holder.itemViewType == TYPE_ITEM_HEADER) {
+            (holder as WifiItemHeaderViewHolder).bind(data[position] as WifiItemHeader)
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int = when (data[position]) {
+        is WifiAccessPoint -> TYPE_ITEM_WIFI_ACCESS_POINT
+        else -> TYPE_ITEM_HEADER
+    }
+
+    data class WifiItemHeader(val messageStringRes: Int)
+
+    class WifiItemHeaderViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        var title: TextView = itemView.findViewById(R.id.textTitle)
+        fun bind(header: WifiItemHeader) {
+            title.setText(header.messageStringRes)
+        }
+    }
+
+    class WifiApViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var textSsid: TextView = itemView.findViewById(R.id.textSsid)
         var textBssid: TextView = itemView.findViewById(R.id.textBssid)

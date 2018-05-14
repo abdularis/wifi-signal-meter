@@ -14,6 +14,7 @@ import com.aar.app.wifinetanalyzer.R
 import com.aar.app.wifinetanalyzer.ViewModelFactory
 import com.aar.app.wifinetanalyzer.model.WifiAccessPoint
 import com.aar.app.wifinetanalyzer.wifilist.WifiListAdapter
+import com.aar.app.wifinetanalyzer.wifilist.WifiAccessPointList
 import com.aar.app.wifinetanalyzer.wifilist.WifiListViewModel
 import kotlinx.android.synthetic.main.activity_wifi_selector.*
 import kotlinx.android.synthetic.main.partial_empty_wifi_list_item.*
@@ -58,7 +59,7 @@ class WifiSelectorActivity : AppCompatActivity() {
         recyclerView.addItemDecoration(divider)
         recyclerView.adapter = wifiListAdapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        viewModel.wifiList.observe(this, Observer { onWifiListUpdated(it) })
+        viewModel.wifiAccessPointList.observe(this, Observer { onWifiListUpdated(it) })
     }
 
     override fun onResume() {
@@ -71,15 +72,15 @@ class WifiSelectorActivity : AppCompatActivity() {
         viewModel.stopListUpdate()
     }
 
-    private fun onWifiListUpdated(wList: List<WifiAccessPoint>?) {
-        wList?.let {
-            if (it.isEmpty()) {
+    private fun onWifiListUpdated(wifiAccessPointList: WifiAccessPointList?) {
+        wifiAccessPointList?.let {
+            if (it.wifiList.isEmpty()) {
                 emptyListLayout.visibility = View.VISIBLE
                 recyclerView.visibility = View.GONE
             } else {
                 emptyListLayout.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
-                wifiListAdapter.wifiAp = it
+                wifiListAdapter.replaceData(it.wifiList)
             }
         }
     }
