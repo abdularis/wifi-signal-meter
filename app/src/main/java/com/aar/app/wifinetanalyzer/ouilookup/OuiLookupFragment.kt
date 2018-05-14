@@ -79,5 +79,11 @@ class OuiLookupFragment: Fragment() {
                 viewModel.searchBy = OuiLookupViewModel.SearchBy.MANUFACTURER
             }
         }
+
+        if (viewModel.searchBy == OuiLookupViewModel.SearchBy.MAC_ADDRESS) {
+            searchByMac.isChecked = true
+        } else {
+            searchByManufacturer.isChecked = true
+        }
     }
 }
