@@ -13,7 +13,7 @@
     <string name="cannot_detect">Cannot detect wifi signal</string>
     <string name="percent">%d %</string>
     <string name="freq_unit">MHz</string>
-    <string name="channel">Channel</string>
+    <string name="channel">Ch</string>
     <string name="rssi_unit">dBm</string>
     <string name="capabilities">Capabilities</string>
     <string name="connection_info">Connection Info</string>
