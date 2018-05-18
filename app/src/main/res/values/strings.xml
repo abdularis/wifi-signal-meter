@@ -66,4 +66,11 @@
     <string name="interfering_channel">Interfering Channels</string>
     <string name="non_interfering_channel">Other Channels</string>
     <string name="connected_wifi">Connected Wifi</string>
+
+    <string name="lbl_filter">Filter</string>
+    <string name="lbl_cancel">Cancel</string>
+    <string name="lbl_ssid">SSID</string>
+    <string name="lbl_channel">Channel</string>
+    <string name="lbl_filter_on">Filter On</string>
+    <string name="lbl_filter_by">Filter by</string>
 </resources>

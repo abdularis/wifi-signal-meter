@@ -6,17 +6,17 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.aar.app.wifinetanalyzer.App
 
 import com.aar.app.wifinetanalyzer.R
 import com.aar.app.wifinetanalyzer.ViewModelFactory
 import com.aar.app.wifinetanalyzer.model.WifiAccessPoint
+import com.aar.app.wifinetanalyzer.wififilterdialog.WifiFilterDialogFragment
 import com.aar.app.wifinetanalyzer.wifilist.WifiListAdapter.OnItemClickListener
 import kotlinx.android.synthetic.main.fragment_wifi_list.*
 import kotlinx.android.synthetic.main.partial_empty_wifi_list_item.*
+import kotlinx.android.synthetic.main.partial_wifi_filter_info.*
 import javax.inject.Inject
 
 class WifiListFragment : Fragment() {
@@ -35,6 +35,7 @@ class WifiListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_wifi_list, container, false)
     }
 
@@ -52,6 +53,10 @@ class WifiListFragment : Fragment() {
         viewModel.wifiAccessPointList.observe(this, Observer {
             onWifiListUpdated(it)
         })
+        viewModel.onFilterChanged.observe(this, Observer {
+            showOrHideFilterLayout()
+        })
+        buttonClearFilter.setOnClickListener { viewModel.clearFilter() }
     }
 
     override fun onResume() {
@@ -64,6 +69,19 @@ class WifiListFragment : Fragment() {
         viewModel.stopListUpdate()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_wifi_list, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.menu_wifi_list_filter) {
+            showFilterListDialog()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun onWifiListUpdated(wifiApList: WifiAccessPointList?) {
         wifiApList?.let {
             if (it.wifiList.isEmpty()) {
@@ -72,8 +90,27 @@ class WifiListFragment : Fragment() {
             } else {
                 emptyListLayout.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
-                wifiListAdapter.replaceData(it)
+
+                if (viewModel.isFilterOn()) {
+                    wifiListAdapter.replaceData(it.wifiList)
+                } else {
+                    wifiListAdapter.replaceData(it)
+                }
             }
+        }
+    }
+
+    private fun showFilterListDialog() {
+        val dialog = WifiFilterDialogFragment()
+        dialog.onFilterListener = { viewModel.filterList(it) }
+        dialog.show(fragmentManager, "wifi_filter")
+    }
+
+    private fun showOrHideFilterLayout() {
+        if (viewModel.isFilterOn()) {
+            filterLayout.visibility = View.VISIBLE
+        } else {
+            filterLayout.visibility = View.GONE
         }
     }
 
