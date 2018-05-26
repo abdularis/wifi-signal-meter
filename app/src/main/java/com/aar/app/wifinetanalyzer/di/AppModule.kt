@@ -6,6 +6,7 @@ import com.aar.app.wifinetanalyzer.ViewModelFactory
 import com.aar.app.wifinetanalyzer.data.DbHelper
 import com.aar.app.wifinetanalyzer.data.VendorFinder
 import com.aar.app.wifinetanalyzer.ouilookup.OuiLookupViewModel
+import com.aar.app.wifinetanalyzer.ping.PingViewModel
 import com.aar.app.wifinetanalyzer.signalmeter.SignalMeterViewModel
 import com.aar.app.wifinetanalyzer.signalmeter.WifiSignalProvider
 import com.aar.app.wifinetanalyzer.timegraph.SignalTimeGraphViewModel
@@ -25,8 +26,14 @@ class AppModule(private val application : Application) {
     fun provideViewModelFactor(signalMeterViewModel: SignalMeterViewModel,
                                wifiListViewModel: WifiListViewModel,
                                signalTimeGraphViewModel: SignalTimeGraphViewModel,
-                               ouiLookupViewModel: OuiLookupViewModel) : ViewModelFactory {
-        return ViewModelFactory(signalMeterViewModel, wifiListViewModel, signalTimeGraphViewModel, ouiLookupViewModel)
+                               ouiLookupViewModel: OuiLookupViewModel,
+                               pingViewModel: PingViewModel) : ViewModelFactory {
+        return ViewModelFactory(
+                signalMeterViewModel,
+                wifiListViewModel,
+                signalTimeGraphViewModel,
+                ouiLookupViewModel,
+                pingViewModel)
     }
 
     @Provides
@@ -57,5 +64,11 @@ class AppModule(private val application : Application) {
     @Singleton
     fun provideOuiLookupViewModel(ctx: Context): OuiLookupViewModel {
         return OuiLookupViewModel(VendorFinder(DbHelper(ctx)))
+    }
+
+    @Provides
+    @Singleton
+    fun providePingViewModel(ctx: Context): PingViewModel {
+        return PingViewModel(VendorFinder(DbHelper(ctx)))
     }
 }

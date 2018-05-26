@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import com.aar.app.wifinetanalyzer.about.AboutActivity
 import com.aar.app.wifinetanalyzer.ouilookup.OuiLookupFragment
+import com.aar.app.wifinetanalyzer.ping.PingFragment
 import com.aar.app.wifinetanalyzer.signalmeter.SignalMeterFragment
 import com.aar.app.wifinetanalyzer.timegraph.SignalTimeGraphFragment
 import com.aar.app.wifinetanalyzer.wifilist.WifiListFragment
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_wifi_list -> goToWifiList(animate)
             R.id.menu_time_graph -> goToTimeGraph(animate)
             R.id.menu_oui_lookup -> goToOuiLookup(animate)
+            R.id.menu_ping -> goToPing(animate)
             R.id.menu_about -> goToAbout()
         }
     }
@@ -104,6 +106,11 @@ class MainActivity : AppCompatActivity() {
     private fun goToOuiLookup(animate: Boolean = true) {
         supportActionBar?.title = getString(R.string.title_oui_lookup)
         replaceFragment(OuiLookupFragment(), R.id.menu_oui_lookup, animate)
+    }
+
+    private fun goToPing(animate: Boolean = true) {
+        supportActionBar?.title = getString(R.string.title_ping)
+        replaceFragment(PingFragment(), R.id.menu_ping, animate)
     }
 
     private fun goToAbout() {

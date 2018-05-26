@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp">
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="6dp"
+        android:background="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/textPingResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="item"/>
+
+</LinearLayout>

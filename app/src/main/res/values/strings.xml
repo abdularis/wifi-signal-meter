@@ -67,10 +67,23 @@
     <string name="non_interfering_channel">Other Channels</string>
     <string name="connected_wifi">Connected Wifi</string>
 
+    <string name="title_ping">Ping</string>
     <string name="lbl_filter">Filter</string>
     <string name="lbl_cancel">Cancel</string>
     <string name="lbl_ssid">SSID</string>
     <string name="lbl_channel">Channel</string>
     <string name="lbl_filter_on">Filter On</string>
     <string name="lbl_filter_by">Filter by</string>
+    <string name="lbl_ping">Ping</string>
+    <string name="lbl_completed">Completed</string>
+    <string name="lbl_stopped">Stopped</string>
+    <string name="lbl_in_progress">Ping in progress…</string>
+    <string name="lbl_stop">Stop</string>
+    <string name="lbl_times">Times</string>
+    <string name="empty_ip">0.0.0.0</string>
+    <string name="hint_ip_address">Ip address</string>
+    <string name="err_ping_msg">Sorry!, something went wrong, please try again.</string>
+    <string name="err_ip_address_msg">Please input the correct ip address. example: 192.168.0.50</string>
+    <string name="err_na">N/A</string>
+    <string name="menu_ping">Ping</string>
 </resources>

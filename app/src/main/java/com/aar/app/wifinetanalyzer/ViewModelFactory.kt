@@ -3,6 +3,7 @@ package com.aar.app.wifinetanalyzer
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.aar.app.wifinetanalyzer.ouilookup.OuiLookupViewModel
+import com.aar.app.wifinetanalyzer.ping.PingViewModel
 import com.aar.app.wifinetanalyzer.signalmeter.SignalMeterViewModel
 import com.aar.app.wifinetanalyzer.timegraph.SignalTimeGraphViewModel
 import com.aar.app.wifinetanalyzer.wifilist.WifiListViewModel
@@ -12,7 +13,8 @@ class ViewModelFactory @Inject constructor(
         private val signalMeterViewModel: SignalMeterViewModel,
         private val wifiListViewModel: WifiListViewModel,
         private val signalTimeGraphViewModel: SignalTimeGraphViewModel,
-        private val ouiLookupViewModel: OuiLookupViewModel
+        private val ouiLookupViewModel: OuiLookupViewModel,
+        private val pingViewModel: PingViewModel
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
@@ -22,6 +24,7 @@ class ViewModelFactory @Inject constructor(
             modelClass.isAssignableFrom(WifiListViewModel::class.java) -> wifiListViewModel as T
             modelClass.isAssignableFrom(SignalTimeGraphViewModel::class.java) -> signalTimeGraphViewModel as T
             modelClass.isAssignableFrom(OuiLookupViewModel::class.java) -> ouiLookupViewModel as T
+            modelClass.isAssignableFrom(PingViewModel::class.java) -> pingViewModel as T
             else -> throw IllegalArgumentException("Unknown view model")
         }
     }

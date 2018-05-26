@@ -17,4 +17,8 @@
 
     <color name="hidden_wifi">#EF6C00</color>
     <color name="connected_wifi">#00C652</color>
+
+    <color name="ping_started">#F57C00</color>
+    <color name="ping_stopped">#E53935</color>
+    <color name="ping_completed">#00C652</color>
 </resources>
