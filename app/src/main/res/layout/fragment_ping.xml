@@ -157,7 +157,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        tools:text="@string/lbl_times"
+        android:text="@string/lbl_times"
         app:layout_constraintBottom_toBottomOf="@+id/seekBarCount"
         app:layout_constraintStart_toEndOf="@+id/textTimes"
         app:layout_constraintTop_toTopOf="@+id/seekBarCount"/>
