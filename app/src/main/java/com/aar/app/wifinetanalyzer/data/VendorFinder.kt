@@ -18,6 +18,8 @@ class VendorFinder(private val dbHelper: DbHelper) {
     private val cache: LruCache<String, String> = LruCache(32)
 
     fun findVendor(mac: String): String? {
+        if (mac.isBlank() || mac.length < 8) return null
+
         var vendor: String? = cache.get(mac)
 
         if (vendor != null) {
@@ -26,7 +28,7 @@ class VendorFinder(private val dbHelper: DbHelper) {
 
         val vendorId = mac.substring(0, 8).toUpperCase()
         val db = dbHelper.readableDatabase
-        val cursor = db.query(TABLE_NAME, arrayOf(COL_VENDOR), "$COL_MAC=?", arrayOf(vendorId), null, null, null)
+        val cursor = db.query(TABLE_NAME, arrayOf(COL_VENDOR), "$COL_MAC=?", arrayOf(vendorId), null, null, null, "1")
         if (cursor.moveToFirst()) {
             vendor = cursor.getString(0)
         }

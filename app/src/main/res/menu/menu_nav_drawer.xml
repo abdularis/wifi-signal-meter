@@ -20,6 +20,10 @@
             android:id="@+id/menu_ping"
             android:icon="@drawable/ic_ping"
             android:title="@string/menu_ping"/>
+        <item
+            android:id="@+id/menu_net_scanner"
+            android:icon="@drawable/ic_net_scan"
+            android:title="@string/menu_net_scanner"/>
     </group>
     <group android:id="@+id/group2">
         <item android:id="@+id/menu_about"

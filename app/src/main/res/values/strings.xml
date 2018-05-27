@@ -86,4 +86,6 @@
     <string name="err_ip_address_msg">Please input the correct ip address. example: 192.168.0.50</string>
     <string name="err_na">N/A</string>
     <string name="menu_ping">Ping</string>
+    <string name="menu_net_scanner">Network Scanner</string>
+    <string name="title_net_scanner">Network Scanner</string>
 </resources>
