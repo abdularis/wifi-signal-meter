@@ -3,127 +3,52 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutContent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Network Interface"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/textIfaceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:textAllCaps="false"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/textView14"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toTopOf="@+id/textView14"
-        tools:text="wlan0"/>
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Ip/Netmask"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        tools:text="wlan0"/>
 
     <TextView
         android:id="@+id/textIpNetmask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView16"
+        app:layout_constraintStart_toStartOf="@+id/textNetId"
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
         tools:text="0.0.0.0/24"/>
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Network Id"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"/>
 
     <TextView
         android:id="@+id/textNetId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/textView18"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toTopOf="@+id/textView18"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintStart_toEndOf="@+id/textIfaceName"
+        app:layout_constraintTop_toBottomOf="@+id/textIpNetmask"
         tools:text="0.0.0.0"/>
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Possible Devices"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"/>
 
     <TextView
         android:id="@+id/textDeviceCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/textView20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toTopOf="@+id/textView20"
-        tools:text="255"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarScan"/>
+        app:layout_constraintStart_toStartOf="@+id/textNetId"
+        app:layout_constraintTop_toBottomOf="@+id/textNetId"
+        tools:text="about 255 possible devices"/>
 
     <Button
         android:id="@+id/buttonScan"
@@ -133,38 +58,118 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/bg_ping_btn"
-        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_scan_btn"
+        android:enabled="false"
         android:text="Scan"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20"/>
+        app:layout_constraintTop_toBottomOf="@+id/textDeviceCount"/>
 
     <ProgressBar
         android:id="@+id/progressBarScan"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:max="100"
         android:progress="0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textProgressIp"/>
+        />
 
     <TextView
         android:id="@+id/textProgressIp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="-"
         android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBarScan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textIfaceName"
+        app:layout_constraintStart_toStartOf="@+id/textIfaceName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_wifi"/>
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonScan"/>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/textProgressIp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider5">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="320dp"
+            tools:layout_editor_absoluteY="150dp"/>
+
+        <LinearLayout
+            android:id="@+id/layoutMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:src="@drawable/ic_no_signal"
+                android:tint="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/textMessage"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textStyle="italic"
+                tools:text="Error"/>
+
+            <Button
+                android:id="@+id/buttonRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_ping_btn"
+                android:text="Refresh"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -88,4 +88,12 @@
     <string name="menu_ping">Ping</string>
     <string name="menu_net_scanner">Network Scanner</string>
     <string name="title_net_scanner">Network Scanner</string>
+
+    <string name="lbl_me">Me</string>
+    <string name="lbl_router">Router</string>
+    <string name="possible_devices">about %s possible devices</string>
+    <string name="err_wifi_not_connected">Please connect your device to wifi network</string>
+    <string name="err_wifi_not_avail">Sorry, it seems that your device doesn\'t have wifi interface</string>
+    <string name="err_wifi_unknown">Sorry, something went wrong, please try again</string>
+    <string name="lbl_scan">Scan</string>
 </resources>

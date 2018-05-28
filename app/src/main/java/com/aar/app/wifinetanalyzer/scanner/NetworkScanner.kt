@@ -50,7 +50,12 @@ class NetworkScanner(ctx: Context, private val vendorFinder: VendorFinder) {
                                 if (ip == scannerInfo.ip) scannerInfo.mac
                                 else ARPInfo.getMACFromIPAddress(ip) ?: ""
                         val vendor = vendorFinder.findVendor(mac) ?: ""
-                        ScanResponse(ip, mac, vendor, true)
+                        val type = when (ip) {
+                            scannerInfo.ip -> ScanResponse.DeviceType.Me
+                            scannerInfo.gatewayIp -> ScanResponse.DeviceType.Router
+                            else -> ScanResponse.DeviceType.Other
+                        }
+                        ScanResponse(ip, mac, vendor, type,true)
                     } else {
                         ScanResponse(ip = ip)
                     }
@@ -60,7 +65,11 @@ class NetworkScanner(ctx: Context, private val vendorFinder: VendorFinder) {
                 })
             }
             executor.shutdown()
-            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS)
+            try {
+                executor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS)
+            } catch (e: Exception) {
+                emitter.onError(e)
+            }
             emitter.onComplete()
         }
     }
@@ -96,6 +105,7 @@ class NetworkScanner(ctx: Context, private val vendorFinder: VendorFinder) {
                         ip = intToStringIP(Integer.reverseBytes(ip)),
                         netmask = intToStringIP(Integer.reverseBytes(netmask)),
                         networkPrefixLength = interfaceAddr.networkPrefixLength,
+                        gatewayIp = intToStringIP(wifiManager.dhcpInfo.gateway),
                         ip4Iterator = Ip4Iterator(ip, netmask))
                 it.onNext(scannerInfo)
                 it.onComplete()

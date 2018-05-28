@@ -2,43 +2,44 @@ package com.aar.app.wifinetanalyzer.scanner
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.aar.app.wifinetanalyzer.scanner.error.EmptyInterfaceAddressException
-import com.aar.app.wifinetanalyzer.scanner.error.WifiInterfaceNotFoundException
-import com.aar.app.wifinetanalyzer.scanner.error.WifiNotConnectedException
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class NetworkScannerViewModel(private val networkScanner: NetworkScanner): ViewModel() {
+    private val _scannerResults = ArrayList<ScanResponse>()
+    private var disposable: Disposable? = null
 
-    enum class State {
-        SCANNING,
-        SCAN_COMPLETED,
-        ERR,
-        ERR_NOT_CONNECTED,
-        ERR_NO_WIFI_FOUND
+    val scanResults: MutableLiveData<List<ScanResponse>> = MutableLiveData()
+    val scanInfo: MutableLiveData<ScannerInfo> = MutableLiveData()
+    val scanProgress: MutableLiveData<Pair<Int, ScanResponse>> = MutableLiveData()
+
+    val isScanning: MutableLiveData<Boolean> = MutableLiveData()
+    val error: MutableLiveData<Throwable> = MutableLiveData()
+
+    init {
+        isScanning.value = false
     }
 
-    private val _scannerResults = ArrayList<ScanResponse>()
-
-    val scannerResults: MutableLiveData<List<ScanResponse>> = MutableLiveData()
-    val scannerInfo: MutableLiveData<ScannerInfo> = MutableLiveData()
-    val scanProgress: MutableLiveData<Pair<Int, ScanResponse>> = MutableLiveData()
-    val state: MutableLiveData<State> = MutableLiveData()
-
     fun queryScannerInfo() {
+        error.value = null
         networkScanner.getScannerInfoObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    scannerInfo.value = it
+                    scanInfo.value = it
                 }, {
-                    onError(it)
+                    error.value = it
                 })
     }
 
     fun scan() {
-        state.value = State.SCANNING
-        networkScanner.scanConnectedWifiNetwork()
+        stopScan()
+        _scannerResults.clear()
+        scanResults.value = _scannerResults
+        error.value = null
+        isScanning.value = true
+        disposable = networkScanner.scanConnectedWifiNetwork()
                 .map {
                     scanProgress.postValue(it)
                     it.second
@@ -48,19 +49,16 @@ class NetworkScannerViewModel(private val networkScanner: NetworkScanner): ViewM
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     _scannerResults.add(it)
-                    scannerResults.value = _scannerResults
+                    scanResults.value = _scannerResults
                 }, {
-                    onError(it)
+                    error.value = it
+                    isScanning.value = false
                 }, {
-                    state.value = State.SCAN_COMPLETED
+                    isScanning.value = false
                 })
     }
 
-    private fun onError(throwable: Throwable) {
-        when (throwable) {
-            is WifiNotConnectedException -> state.value = State.ERR_NOT_CONNECTED
-            is WifiInterfaceNotFoundException -> state.value = State.ERR_NO_WIFI_FOUND
-            else -> state.value = State.ERR
-        }
+    fun stopScan() {
+        disposable?.dispose()
     }
 }

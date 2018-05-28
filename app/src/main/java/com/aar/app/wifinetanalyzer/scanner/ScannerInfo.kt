@@ -6,5 +6,6 @@ data class ScannerInfo(
         val ip: String,
         val netmask: String,
         val networkPrefixLength: Short,
+        val gatewayIp: String,
         val ip4Iterator: Ip4Iterator
 )

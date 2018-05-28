@@ -14,9 +14,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        tools:text="@string/empty_ip"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toEndOf="@+id/imageDevType"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/empty_ip"/>
 
     <TextView
         android:id="@+id/textMac"
@@ -25,9 +25,10 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        tools:text="@string/default_mac"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/default_mac"/>
 
     <TextView
         android:id="@+id/textVendor"
@@ -39,8 +40,32 @@
         android:layout_marginTop="4dp"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textMac"
         tools:text="vendor"/>
+
+    <ImageView
+        android:id="@+id/imageDevType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_device"/>
+
+    <TextView
+        android:id="@+id/textDevType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Router"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="9sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageDevType"
+        app:layout_constraintStart_toStartOf="@+id/imageDevType"
+        app:layout_constraintTop_toBottomOf="@+id/imageDevType"/>
 </android.support.constraint.ConstraintLayout>

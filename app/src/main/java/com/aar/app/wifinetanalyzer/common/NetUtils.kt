@@ -10,7 +10,7 @@ import java.net.Inet4Address
 
 fun intToStringIP(ip: Int?): String =
     if (ip == null) "0.0.0.0"
-    else "${ip shr 24 and 0xFF}.${ip shr 16 and 0xFF}.${ip shr 8 and 0xFF}.${ip and 0xFF}"
+    else "${ip and 0xFF}.${ip shr 8 and 0xFF}.${ip shr 16 and 0xFF}.${ip shr 24 and 0xFF}"
 
 fun byteArrayToStringIp(ip: ByteArray): String =
         Inet4Address.getByAddress(ip).hostAddress
