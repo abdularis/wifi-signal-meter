@@ -37,14 +37,14 @@ class NetworkScannerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        recyclerView.adapter = deviceListAdapter
-//        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//        recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
-//
-//        buttonScan.setOnClickListener { viewModel.scan() }
-//        buttonRefresh.setOnClickListener { viewModel.queryScannerInfo() }
-//
-//        initViewModel()
+        recyclerView.adapter = deviceListAdapter
+        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+
+        buttonScan.setOnClickListener { scanOrStop() }
+        buttonRefresh.setOnClickListener { viewModel.queryScannerInfo() }
+
+        initViewModel()
     }
 
     private fun initViewModel() {
@@ -99,7 +99,9 @@ class NetworkScannerFragment : Fragment() {
             buttonScan.setText(R.string.lbl_stop)
         } else {
             textProgressIp.visibility = View.GONE
+            textProgressIp.text = "-"
             progressBarScan.visibility = View.GONE
+            progressBarScan.progress = 0
             buttonScan.setBackgroundResource(R.drawable.bg_ping_btn)
             buttonScan.setText(R.string.lbl_scan)
         }
@@ -115,5 +117,13 @@ class NetworkScannerFragment : Fragment() {
         textNetId.text = "-"
         textDeviceCount.text = "-"
         buttonScan.isEnabled = false
+    }
+
+    private fun scanOrStop() {
+        if (viewModel.isScanning.value == true) {
+            viewModel.stopScan()
+        } else {
+            viewModel.scan()
+        }
     }
 }

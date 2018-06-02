@@ -34,7 +34,9 @@ class NetworkScannerViewModel(private val networkScanner: NetworkScanner): ViewM
     }
 
     fun scan() {
-        stopScan()
+        if (isScanning.value == true)
+            return
+
         _scannerResults.clear()
         scanResults.value = _scannerResults
         error.value = null
@@ -60,5 +62,7 @@ class NetworkScannerViewModel(private val networkScanner: NetworkScanner): ViewM
 
     fun stopScan() {
         disposable?.dispose()
+        disposable = null
+        isScanning.value = false
     }
 }

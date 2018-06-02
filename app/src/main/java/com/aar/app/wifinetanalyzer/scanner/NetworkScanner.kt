@@ -68,7 +68,7 @@ class NetworkScanner(ctx: Context, private val vendorFinder: VendorFinder) {
             try {
                 executor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS)
             } catch (e: Exception) {
-                emitter.onError(e)
+                Log.d("NetworkScanner", "Scanning network was cancelled or intercepted")
             }
             emitter.onComplete()
         }
