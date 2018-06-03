@@ -3,16 +3,21 @@ package com.aar.app.wifinetanalyzer.signalmeter
 import android.arch.lifecycle.ViewModel
 import com.aar.app.wifinetanalyzer.common.Optional
 import com.aar.app.wifinetanalyzer.model.WifiAccessPoint
+import com.aar.app.wifinetanalyzer.settings.SettingsProvider
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-abstract class AbstractSignalUpdateViewModel(protected val wifiSignalProvider: WifiSignalProvider): ViewModel() {
+abstract class AbstractSignalUpdateViewModel(
+        protected val wifiSignalProvider: WifiSignalProvider,
+        protected val settingsProvider: SettingsProvider): ViewModel() {
 
     private var disposable: Disposable? = null
     protected var ssid = ""
     protected var bssid = ""
+
+    val scanInterval get() = (settingsProvider.scanInterval * 1000).toLong()
 
     fun startSignalUpdate() {
         if (disposable != null) return
@@ -38,9 +43,9 @@ abstract class AbstractSignalUpdateViewModel(protected val wifiSignalProvider: W
 
     private fun createSignalUpdateFlowable(): Flowable<Optional<WifiAccessPoint>> {
         val flowable: Flowable<Optional<WifiAccessPoint>> = if (bssid.isEmpty()) {
-            wifiSignalProvider.connectedWifiSignalUpdate(2000)
+            wifiSignalProvider.connectedWifiSignalUpdate(scanInterval)
         } else {
-            wifiSignalProvider.wifiSignalUpdate(2000, ssid, bssid)
+            wifiSignalProvider.wifiSignalUpdate(scanInterval, ssid, bssid)
         }
 
         return flowable.subscribeOn(Schedulers.io())

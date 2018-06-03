@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel
 import com.aar.app.wifinetanalyzer.common.Optional
 import com.aar.app.wifinetanalyzer.model.SignalshotBuffer
 import com.aar.app.wifinetanalyzer.model.WifiAccessPoint
+import com.aar.app.wifinetanalyzer.settings.SettingsProvider
 import com.aar.app.wifinetanalyzer.signalmeter.AbstractSignalUpdateViewModel
 import com.aar.app.wifinetanalyzer.signalmeter.WifiSignalProvider
 import io.reactivex.Flowable
@@ -13,7 +14,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class SignalTimeGraphViewModel @Inject constructor(wifiSignalProvider: WifiSignalProvider): AbstractSignalUpdateViewModel(wifiSignalProvider) {
+class SignalTimeGraphViewModel @Inject constructor(wifiSignalProvider: WifiSignalProvider, settingsProvider: SettingsProvider)
+    : AbstractSignalUpdateViewModel(wifiSignalProvider, settingsProvider) {
 
     private val _signalshotBuffer: SignalshotBuffer = SignalshotBuffer()
     val signalshotBuffer: MutableLiveData<SignalshotBuffer> = MutableLiveData()

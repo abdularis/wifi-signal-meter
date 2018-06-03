@@ -47,6 +47,11 @@ class NetworkScannerFragment : Fragment() {
         initViewModel()
     }
 
+    override fun onResume() {
+        super.onResume()
+        textThread.text = "Using %s threads".format(viewModel.threadCount.toString())
+    }
+
     private fun initViewModel() {
         (activity?.application as App).appComponent.inject(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(NetworkScannerViewModel::class.java)

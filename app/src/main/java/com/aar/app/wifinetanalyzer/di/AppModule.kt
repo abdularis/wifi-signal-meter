@@ -9,6 +9,7 @@ import com.aar.app.wifinetanalyzer.ouilookup.OuiLookupViewModel
 import com.aar.app.wifinetanalyzer.ping.PingViewModel
 import com.aar.app.wifinetanalyzer.scanner.NetworkScanner
 import com.aar.app.wifinetanalyzer.scanner.NetworkScannerViewModel
+import com.aar.app.wifinetanalyzer.settings.SettingsProvider
 import com.aar.app.wifinetanalyzer.signalmeter.SignalMeterViewModel
 import com.aar.app.wifinetanalyzer.signalmeter.WifiSignalProvider
 import com.aar.app.wifinetanalyzer.timegraph.SignalTimeGraphViewModel
@@ -48,8 +49,8 @@ class AppModule(private val application : Application) {
 
     @Provides
     @Singleton
-    fun provideSignalMeterViewModel(wifiSignalProvider: WifiSignalProvider) : SignalMeterViewModel {
-        return SignalMeterViewModel(wifiSignalProvider)
+    fun provideSignalMeterViewModel(wifiSignalProvider: WifiSignalProvider, settingsProvider: SettingsProvider) : SignalMeterViewModel {
+        return SignalMeterViewModel(wifiSignalProvider, settingsProvider)
     }
 
     @Provides
@@ -60,8 +61,8 @@ class AppModule(private val application : Application) {
 
     @Provides
     @Singleton
-    fun provideSignalTimeGraphViewModel(wifiSignalProvider: WifiSignalProvider): SignalTimeGraphViewModel {
-        return SignalTimeGraphViewModel(wifiSignalProvider)
+    fun provideSignalTimeGraphViewModel(wifiSignalProvider: WifiSignalProvider, settingsProvider: SettingsProvider): SignalTimeGraphViewModel {
+        return SignalTimeGraphViewModel(wifiSignalProvider, settingsProvider)
     }
 
     @Provides
@@ -78,7 +79,13 @@ class AppModule(private val application : Application) {
 
     @Provides
     @Singleton
-    fun provideNetworkScannerViewModel(ctx: Context): NetworkScannerViewModel {
-        return NetworkScannerViewModel(NetworkScanner(ctx, VendorFinder(DbHelper(ctx))))
+    fun provideNetworkScannerViewModel(ctx: Context, settingsProvider: SettingsProvider): NetworkScannerViewModel {
+        return NetworkScannerViewModel(NetworkScanner(ctx, VendorFinder(DbHelper(ctx))), settingsProvider)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSettingsProvider(ctx: Context): SettingsProvider {
+        return SettingsProvider(ctx)
     }
 }

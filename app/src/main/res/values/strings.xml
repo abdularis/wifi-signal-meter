@@ -91,9 +91,15 @@
 
     <string name="lbl_me">Me</string>
     <string name="lbl_router">Router</string>
-    <string name="possible_devices">about %s possible devices</string>
+    <string name="possible_devices">%s addresses</string>
     <string name="err_wifi_not_connected">Please connect your device to wifi network</string>
     <string name="err_wifi_not_avail">Sorry, it seems that your device doesn\'t have wifi interface</string>
     <string name="err_wifi_unknown">Sorry, something went wrong, please try again</string>
     <string name="lbl_scan">Scan</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_settings">Settings</string>
+    <string name="pref_scan_interval">Scan Interval</string>
+    <string name="pref_thread_count">Scanner Threads</string>
+    <string name="pref_thread_count_summary">How many threads used to scan network</string>
+    <string name="pref_scan_interval_summary"><![CDATA[Signal meter & time graph update interval]]></string>
 </resources>

@@ -32,10 +32,10 @@ class NetworkScanner(ctx: Context, private val vendorFinder: VendorFinder) {
     private val connManager = ctx.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     private val wifiManager = ctx.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
 
-    inner class PingObservableOnSubscribe(private val scannerInfo: ScannerInfo): ObservableOnSubscribe<Pair<Int, ScanResponse>> {
+    inner class PingObservableOnSubscribe(private val scannerInfo: ScannerInfo, private val threadCount: Int): ObservableOnSubscribe<Pair<Int, ScanResponse>> {
         override fun subscribe(emitter: ObservableEmitter<Pair<Int, ScanResponse>>) {
             val ip4Iterator = scannerInfo.ip4Iterator
-            val executor = Executors.newFixedThreadPool(16)
+            val executor = Executors.newFixedThreadPool(threadCount)
 
             val progress = AtomicInteger(0)
             val count = ip4Iterator.numberOfIp
@@ -74,9 +74,9 @@ class NetworkScanner(ctx: Context, private val vendorFinder: VendorFinder) {
         }
     }
 
-    fun scanConnectedWifiNetwork(): Observable<Pair<Int, ScanResponse>> {
+    fun scanConnectedWifiNetwork(threadCount: Int): Observable<Pair<Int, ScanResponse>> {
         return getScannerInfoObservable()
-                .flatMap { Observable.create(PingObservableOnSubscribe(it)) }
+                .flatMap { Observable.create(PingObservableOnSubscribe(it, threadCount)) }
     }
 
     fun getScannerInfoObservable(): Observable<ScannerInfo> {

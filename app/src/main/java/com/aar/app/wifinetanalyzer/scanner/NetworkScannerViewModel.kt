@@ -2,13 +2,16 @@ package com.aar.app.wifinetanalyzer.scanner
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.aar.app.wifinetanalyzer.settings.SettingsProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class NetworkScannerViewModel(private val networkScanner: NetworkScanner): ViewModel() {
+class NetworkScannerViewModel(private val networkScanner: NetworkScanner, private val settingsProvider: SettingsProvider): ViewModel() {
     private val _scannerResults = ArrayList<ScanResponse>()
     private var disposable: Disposable? = null
+
+    val threadCount get() = settingsProvider.threadCount
 
     val scanResults: MutableLiveData<List<ScanResponse>> = MutableLiveData()
     val scanInfo: MutableLiveData<ScannerInfo> = MutableLiveData()
@@ -41,7 +44,7 @@ class NetworkScannerViewModel(private val networkScanner: NetworkScanner): ViewM
         scanResults.value = _scannerResults
         error.value = null
         isScanning.value = true
-        disposable = networkScanner.scanConnectedWifiNetwork()
+        disposable = networkScanner.scanConnectedWifiNetwork(settingsProvider.threadCount)
                 .map {
                     scanProgress.postValue(it)
                     it.second

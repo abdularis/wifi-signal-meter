@@ -25,7 +25,10 @@
             android:icon="@drawable/ic_net_scan"
             android:title="@string/menu_net_scanner"/>
     </group>
-    <group android:id="@+id/group2">
+    <group android:id="@+id/group2" android:checkableBehavior="none">
+        <item android:id="@+id/menu_settings"
+              android:title="@string/menu_settings"
+              android:icon="@drawable/ic_settings"/>
         <item android:id="@+id/menu_about"
               android:title="@string/menu_about"
               android:icon="@drawable/ic_about"/>
