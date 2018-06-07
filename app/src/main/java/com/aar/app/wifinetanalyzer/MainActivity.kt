@@ -6,16 +6,19 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import com.aar.app.wifinetanalyzer.about.AboutActivity
 import com.aar.app.wifinetanalyzer.ouilookup.OuiLookupFragment
 import com.aar.app.wifinetanalyzer.ping.PingFragment
 import com.aar.app.wifinetanalyzer.scanner.NetworkScannerFragment
 import com.aar.app.wifinetanalyzer.settings.SettingsActivity
-import com.aar.app.wifinetanalyzer.settings.SettingsFragment
 import com.aar.app.wifinetanalyzer.signalmeter.SignalMeterFragment
 import com.aar.app.wifinetanalyzer.timegraph.SignalTimeGraphFragment
 import com.aar.app.wifinetanalyzer.wifilist.WifiListFragment
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.partial_toolbar.*
 
@@ -42,6 +45,17 @@ class MainActivity : AppCompatActivity() {
             currentFragment = it.getInt(STATE_CURRENT_FRAGMENT, currentFragment)
         }
         goToScreen(currentFragment, animate = false)
+
+        adsView.loadAd(AdRequest.Builder().build())
+        adsView.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                adsView.visibility = View.VISIBLE
+            }
+
+            override fun onAdFailedToLoad(err: Int) {
+                Log.d("MainAds", "Failed to load ads, err: $err")
+            }
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

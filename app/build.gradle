@@ -14,9 +14,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "ADMOB_APP_ID", WifiNetworkAnalyzer_Admob_app_id
+            resValue "string", "admob_ads_unit1", WifiNetworkAnalyzer_Admob_ads_unit1
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "ADMOB_APP_ID", WifiNetworkAnalyzer_Admob_app_id
+            resValue "string", "admob_ads_unit1", WifiNetworkAnalyzer_Admob_ads_unit1
         }
     }
 }
@@ -24,13 +30,16 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.google.firebase:firebase-core:15.0.0'
+    implementation 'com.google.android.gms:play-services-ads:15.0.1'
+    implementation 'com.android.support:customtabs:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:preference-v7:27.1.1'
-    implementation "android.arch.lifecycle:extensions:1.1.1"
-    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'android.arch.lifecycle:viewmodel:1.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -43,3 +52,5 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.15'
     kapt 'com.google.dagger:dagger-compiler:2.15'
 }
+
+apply plugin: 'com.google.gms.google-services'
