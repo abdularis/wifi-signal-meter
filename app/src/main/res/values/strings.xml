@@ -46,7 +46,7 @@
     <string name="signal_strength_label">Signal strength (dBm)</string>
     <string name="empty_wifi_list">No wifi signal in range</string>
 
-    <string name="description">Simple, beautiful and reliable wifi tools to help you spot the best wifi signal, analyze and discover hidden access point</string>
+    <string name="description">Simple and reliable wifi tools to help you spot the best wifi signal, analyze, discover hidden access point and scan connected devices</string>
     <string name="copyright">Copyright © 2018 - A Aris R</string>
     <string name="license_gaugeview">GaugeView - https://github.com/abdularis/GaugeView</string>
     <string name="license_mpandroidchart">MPAndroidChart - https://github.com/PhilJay/MPAndroidChart</string>
@@ -102,4 +102,5 @@
     <string name="pref_thread_count">Scanner Threads</string>
     <string name="pref_thread_count_summary">How many threads used to scan network</string>
     <string name="pref_scan_interval_summary"><![CDATA[Signal meter & time graph update interval]]></string>
+    <string name="license_androidnettools">AndroidNetworkTools - https://github.com/stealthcopter/AndroidNetworkTools</string>
 </resources>

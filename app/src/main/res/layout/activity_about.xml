@@ -133,6 +133,15 @@
                     android:autoLink="all"
                     android:linksClickable="true"
                     android:textColorLink="@color/colorAccent"
+                    android:text="@string/license_androidnettools"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:autoLink="all"
+                    android:linksClickable="true"
+                    android:textColorLink="@color/colorAccent"
                     android:text="@string/license_rxjava"/>
 
                 <TextView
