@@ -25,12 +25,12 @@ class NetworkScannerViewModel(private val networkScanner: NetworkScanner, privat
     }
 
     fun queryScannerInfo() {
-        error.value = null
         networkScanner.getScannerInfoObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     scanInfo.value = it
+                    error.value = null
                 }, {
                     error.value = it
                 })

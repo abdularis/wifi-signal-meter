@@ -87,12 +87,10 @@ class NetworkScannerFragment : Fragment() {
                 else -> textMessage.setText(R.string.err_wifi_unknown)
             }
             layoutMessage.visibility = View.VISIBLE
-            recyclerView.visibility = View.GONE
-            disableScan()
+            layoutContent.visibility = View.GONE
         } else {
             layoutMessage.visibility = View.GONE
-            recyclerView.visibility = View.VISIBLE
-            enableScan()
+            layoutContent.visibility = View.VISIBLE
         }
     }
 
@@ -110,18 +108,6 @@ class NetworkScannerFragment : Fragment() {
             buttonScan.setBackgroundResource(R.drawable.bg_ping_btn)
             buttonScan.setText(R.string.lbl_scan)
         }
-    }
-
-    private fun enableScan() {
-        buttonScan.isEnabled = true
-    }
-
-    private fun disableScan() {
-        textIfaceName.setText(R.string.err_na)
-        textIpNetmask.text = "-"
-        textNetId.text = "-"
-        textDeviceCount.text = "-"
-        buttonScan.isEnabled = false
     }
 
     private fun scanOrStop() {

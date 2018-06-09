@@ -11,7 +11,7 @@ class Ip4Iterator(val ip: Int, val netmask: Int) {
     private var _currentIp = 0
 
     val networkId = netmask and ip
-    val numberOfIp = (0xffffffff xor netmask.toLong()).toInt()
+    val numberOfIp = (0xffffffff xor netmask.toLong()).toInt() - 1 // ignore last address (broadcast)
     val currentIp get() = _currentIp
     val currentHostId get() = _currentHostId
 
