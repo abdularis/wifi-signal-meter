@@ -2,7 +2,9 @@ package com.aar.app.wifinetanalyzer.wifilist
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -24,7 +26,6 @@ class WifiListFragment : Fragment() {
     @Inject
     lateinit var mViewModelFactory: ViewModelFactory
     lateinit var viewModel: WifiListViewModel
-    var onWifiItemClickListener: OnWifiItemClickListener? = null
     val wifiListAdapter: WifiListAdapter = WifiListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +44,7 @@ class WifiListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         wifiListAdapter.onItemClickListener = object: OnItemClickListener {
             override fun onItemClick(wifiAp: WifiAccessPoint) {
-                onWifiItemClickListener?.onWifiItemClick(wifiAp)
+                startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
             }
         }
         val divider = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
@@ -112,9 +113,5 @@ class WifiListFragment : Fragment() {
         } else {
             filterLayout.visibility = View.GONE
         }
-    }
-
-    interface OnWifiItemClickListener {
-        fun onWifiItemClick(wifiAp: WifiAccessPoint)
     }
 }
